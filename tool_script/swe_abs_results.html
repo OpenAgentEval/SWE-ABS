@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SWE-ABS Benchmark Results - SWE-Bench Verified</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-size: 1.1em;
+            opacity: 0.9;
+            margin-top: 10px;
+        }
+
+        .stats-section {
+            padding: 30px 40px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .stat-card h3 {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .stat-card .value {
+            font-size: 2em;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .stat-card .unit {
+            font-size: 0.8em;
+            color: #6c757d;
+            margin-left: 5px;
+        }
+
+        .controls {
+            padding: 30px 40px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 20px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: all 0.3s;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            border: 2px solid #e9ecef;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .filter-btn:hover {
+            border-color: #667eea;
+            color: #667eea;
+        }
+
+        .filter-btn.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            padding: 0 40px 40px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        thead {
+            background: #f8f9fa;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        th {
+            padding: 16px 12px;
+            text-align: left;
+            font-weight: 700;
+            color: #495057;
+            cursor: pointer;
+            user-select: none;
+            border-bottom: 2px solid #e9ecef;
+            transition: background 0.2s;
+            position: relative;
+        }
+
+        th:hover {
+            background: #e9ecef;
+        }
+
+        th.sortable::after {
+            content: '⇅';
+            margin-left: 8px;
+            opacity: 0.3;
+            font-size: 12px;
+        }
+
+        th.sorted-asc::after {
+            content: '↑';
+            opacity: 1;
+            color: #667eea;
+        }
+
+        th.sorted-desc::after {
+            content: '↓';
+            opacity: 1;
+            color: #667eea;
+        }
+
+        td {
+            padding: 16px 12px;
+            border-bottom: 1px solid #f1f3f5;
+            color: #212529;
+        }
+
+        tbody tr {
+            transition: background 0.2s;
+        }
+
+        tbody tr:hover {
+            background: #f8f9fa;
+        }
+
+        tbody tr.highlight-big-drop {
+            background: #fff3cd;
+        }
+
+        .date {
+            font-family: 'Courier New', monospace;
+            color: #6c757d;
+            font-size: 0.9em;
+        }
+
+        .model-name {
+            font-weight: 500;
+            color: #212529;
+        }
+
+        .percentage {
+            font-weight: 600;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .orig-pct {
+            color: #28a745;
+        }
+
+        .swe-abs-pct {
+            color: #007bff;
+        }
+
+        .drop-pct {
+            color: #dc3545;
+        }
+
+        .rank-change {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+
+        .rank-up {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .rank-down {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .rank-same {
+            background: #e2e3e5;
+            color: #383d41;
+        }
+
+        .arrow {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .chart-section {
+            padding: 40px;
+            background: white;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .chart-title {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #212529;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .bar-chart {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-height: 600px;
+            overflow-y: auto;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+        }
+
+        .bar-item {
+            display: grid;
+            grid-template-columns: 200px 1fr 80px;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .bar-label {
+            font-size: 0.85em;
+            color: #495057;
+            font-weight: 600;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .bar-container {
+            background: #e9ecef;
+            border-radius: 20px;
+            height: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bar-fill {
+            height: 100%;
+            border-radius: 20px;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+            color: white;
+            font-size: 0.75em;
+            font-weight: 700;
+        }
+
+        .bar-value {
+            font-size: 0.9em;
+            font-weight: 700;
+            color: #495057;
+            text-align: right;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            color: #6c757d;
+            font-size: 1.1em;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        footer {
+            padding: 20px;
+            text-align: center;
+            background: #f8f9fa;
+            color: #6c757d;
+            font-size: 0.9em;
+            border-top: 1px solid #e9ecef;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .controls, .stats-section, .table-container, .chart-section {
+                padding: 20px;
+            }
+
+            .bar-item {
+                grid-template-columns: 150px 1fr 60px;
+                gap: 10px;
+            }
+
+            table {
+                font-size: 14px;
+            }
+
+            th, td {
+                padding: 10px 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>SWE-ABS Benchmark Results</h1>
+            <div class="subtitle">Performance comparison of top 30 agent systems on <strong>SWE-Bench Verified</strong> vs SWE-ABS</div>
+        </header>
+
+        <div class="stats-section" id="statsSection">
+            <div class="stat-card">
+                <h3>Total Models</h3>
+                <div class="value" id="totalModels">0</div>
+            </div>
+            <div class="stat-card">
+                <h3>Avg. SWE-Bench Verified</h3>
+                <div class="value" id="avgOriginal">0<span class="unit">%</span></div>
+            </div>
+            <div class="stat-card">
+                <h3>Avg. SWE-ABS</h3>
+                <div class="value" id="avgSweAbs">0<span class="unit">%</span></div>
+            </div>
+            <div class="stat-card">
+                <h3>Avg. Drop</h3>
+                <div class="value" id="avgDrop">0<span class="unit">%</span></div>
+            </div>
+            <div class="stat-card">
+                <h3>Max Drop</h3>
+                <div class="value" id="maxDrop">0<span class="unit">%</span></div>
+            </div>
+            <div class="stat-card">
+                <h3>Min Drop</h3>
+                <div class="value" id="minDrop">0<span class="unit">%</span></div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Search by model name or date...">
+            </div>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="rank-up">Rank Up</button>
+                <button class="filter-btn" data-filter="rank-down">Rank Down</button>
+                <button class="filter-btn" data-filter="big-drop">Big Drop (>18%)</button>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <table id="resultsTable">
+                <thead>
+                    <tr>
+                        <th class="sortable" data-column="date">Date</th>
+                        <th class="sortable" data-column="model">Model</th>
+                        <th class="sortable" data-column="orig">SWE-Bench Verified (%)</th>
+                        <th class="sortable" data-column="swe-abs">SWE-ABS (%)</th>
+                        <th class="sortable" data-column="drop">Drop (%)</th>
+                        <th class="sortable" data-column="old-rank">Old Rank</th>
+                        <th class="sortable" data-column="new-rank">New Rank</th>
+                        <th class="sortable" data-column="rank-change">Rank Change</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                </tbody>
+            </table>
+            <div id="noResults" class="no-results hidden">
+                No results found. Try a different search term or filter.
+            </div>
+        </div>
+
+        <div class="chart-section">
+            <div class="chart-title">Performance Drop Comparison</div>
+            <div class="bar-chart" id="barChart"></div>
+        </div>
+
+        <footer>
+            <p>Data generated from SWE-Bench Verified evaluation results | Last updated: <span id="lastUpdated">-</span></p>
+        </footer>
+    </div>
+
+    <script>
+        let data = [];
+        let metadata = {};
+        let currentSort = {column: null, direction: 'asc'};
+        let filteredData = [];
+        let currentFilter = 'all';
+
+        // 加载JSON数据
+        async function loadData() {
+            try {
+                const response = await fetch('swe_abs_data.json');
+                const jsonData = await response.json();
+                metadata = jsonData.metadata;
+                data = jsonData.data;
+                filteredData = [...data];
+
+                updateStats();
+                updateLastUpdated();
+                sortData('old-rank');
+                renderBarChart();
+            } catch (error) {
+                console.error('加载数据失败:', error);
+                document.getElementById('noResults').textContent = '数据加载失败，请确保 swe_abs_data.json 文件存在。';
+                document.getElementById('noResults').classList.remove('hidden');
+                document.getElementById('resultsTable').style.display = 'none';
+            }
+        }
+
+        function updateStats() {
+            document.getElementById('totalModels').textContent = data.length;
+
+            const avgOrig = data.reduce((sum, d) => sum + d.orig, 0) / data.length;
+            const avgSweAbs = data.reduce((sum, d) => sum + d.sweAbs, 0) / data.length;
+            const avgDrop = data.reduce((sum, d) => sum + d.drop, 0) / data.length;
+            const maxDrop = Math.max(...data.map(d => d.drop));
+            const minDrop = Math.min(...data.map(d => d.drop));
+
+            document.getElementById('avgOriginal').innerHTML = `${avgOrig.toFixed(1)}<span class="unit">%</span>`;
+            document.getElementById('avgSweAbs').innerHTML = `${avgSweAbs.toFixed(1)}<span class="unit">%</span>`;
+            document.getElementById('avgDrop').innerHTML = `${avgDrop.toFixed(1)}<span class="unit">%</span>`;
+            document.getElementById('maxDrop').innerHTML = `${maxDrop.toFixed(1)}<span class="unit">%</span>`;
+            document.getElementById('minDrop').innerHTML = `${minDrop.toFixed(1)}<span class="unit">%</span>`;
+        }
+
+        function updateLastUpdated() {
+            if (metadata.generatedAt) {
+                const date = new Date(metadata.generatedAt);
+                document.getElementById('lastUpdated').textContent = date.toLocaleString();
+            }
+        }
+
+        function renderTable(dataToRender = filteredData) {
+            const tbody = document.getElementById('tableBody');
+            tbody.innerHTML = '';
+
+            if (dataToRender.length === 0) {
+                document.getElementById('noResults').classList.remove('hidden');
+                document.getElementById('resultsTable').style.display = 'none';
+                return;
+            }
+
+            document.getElementById('noResults').classList.add('hidden');
+            document.getElementById('resultsTable').style.display = 'table';
+
+            dataToRender.forEach(row => {
+                const tr = document.createElement('tr');
+                const rankChange = row.oldRank - row.newRank;
+
+                let rankClass, rankArrow;
+                if (rankChange > 0) {
+                    rankClass = 'rank-up';
+                    rankArrow = '↑';
+                } else if (rankChange < 0) {
+                    rankClass = 'rank-down';
+                    rankArrow = '↓';
+                } else {
+                    rankClass = 'rank-same';
+                    rankArrow = '—';
+                }
+
+                if (row.drop > 18) {
+                    tr.classList.add('highlight-big-drop');
+                }
+
+                tr.innerHTML = `
+                    <td class="date">${row.date}</td>
+                    <td class="model-name">${row.model}</td>
+                    <td class="percentage orig-pct">${row.orig.toFixed(2)}%</td>
+                    <td class="percentage swe-abs-pct">${row.sweAbs.toFixed(2)}%</td>
+                    <td class="percentage drop-pct">${row.drop.toFixed(2)}%</td>
+                    <td>${row.oldRank}</td>
+                    <td>${row.newRank}</td>
+                    <td>
+                        <span class="rank-change ${rankClass}">
+                            <span class="arrow">${rankArrow}</span>
+                            ${row.oldRank} → ${row.newRank}
+                        </span>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function renderBarChart() {
+            const chartContainer = document.getElementById('barChart');
+            chartContainer.innerHTML = '';
+
+            const sortedByDrop = [...data].sort((a, b) => b.drop - a.drop);
+            const maxDrop = Math.max(...data.map(d => d.drop));
+
+            sortedByDrop.forEach(row => {
+                const item = document.createElement('div');
+                item.className = 'bar-item';
+
+                const percentage = (row.drop / maxDrop) * 100;
+                const color = row.drop > 18 ? '#dc3545' : row.drop > 16 ? '#fd7e14' : '#667eea';
+
+                item.innerHTML = `
+                    <div class="bar-label" title="${row.model}">${row.model}</div>
+                    <div class="bar-container">
+                        <div class="bar-fill" style="width: ${percentage}%; background: ${color};"></div>
+                    </div>
+                    <div class="bar-value">${row.drop.toFixed(1)}%</div>
+                `;
+
+                chartContainer.appendChild(item);
+            });
+        }
+
+        function sortData(column) {
+            if (currentSort.column === column) {
+                currentSort.direction = currentSort.direction === 'asc' ? 'desc' : 'asc';
+            } else {
+                currentSort.column = column;
+                currentSort.direction = 'asc';
+            }
+
+            const columnMap = {
+                'date': 'date',
+                'model': 'model',
+                'orig': 'orig',
+                'swe-abs': 'sweAbs',
+                'drop': 'drop',
+                'old-rank': 'oldRank',
+                'new-rank': 'newRank',
+                'rank-change': (row) => row.oldRank - row.newRank
+            };
+
+            filteredData.sort((a, b) => {
+                const key = columnMap[column];
+                let aVal, bVal;
+
+                if (typeof key === 'function') {
+                    aVal = key(a);
+                    bVal = key(b);
+                } else {
+                    aVal = a[key];
+                    bVal = b[key];
+                }
+
+                if (typeof aVal === 'string') {
+                    return currentSort.direction === 'asc'
+                        ? aVal.localeCompare(bVal)
+                        : bVal.localeCompare(aVal);
+                } else {
+                    return currentSort.direction === 'asc'
+                        ? aVal - bVal
+                        : bVal - aVal;
+                }
+            });
+
+            updateSortIndicators(column);
+            renderTable();
+        }
+
+        function updateSortIndicators(column) {
+            document.querySelectorAll('th').forEach(th => {
+                th.classList.remove('sorted-asc', 'sorted-desc');
+            });
+
+            const th = document.querySelector(`th[data-column="${column}"]`);
+            if (th) {
+                th.classList.add(currentSort.direction === 'asc' ? 'sorted-asc' : 'sorted-desc');
+            }
+        }
+
+        function applyFilter(filterType) {
+            currentFilter = filterType;
+
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+
+            filteredData = data.filter(row => {
+                // 先应用搜索过滤
+                const matchesSearch = row.model.toLowerCase().includes(searchTerm) || row.date.includes(searchTerm);
+                if (!matchesSearch) return false;
+
+                // 再应用分类过滤
+                const rankChange = row.oldRank - row.newRank;
+                switch (filterType) {
+                    case 'rank-up':
+                        return rankChange > 0;
+                    case 'rank-down':
+                        return rankChange < 0;
+                    case 'big-drop':
+                        return row.drop > 18;
+                    default:
+                        return true;
+                }
+            });
+
+            renderTable();
+        }
+
+        // Event listeners
+        document.querySelectorAll('th.sortable').forEach(th => {
+            th.addEventListener('click', () => {
+                sortData(th.dataset.column);
+            });
+        });
+
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            applyFilter(currentFilter);
+        });
+
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                applyFilter(btn.dataset.filter);
+            });
+        });
+
+        // 页面加载时加载数据
+        window.addEventListener('DOMContentLoaded', loadData);
+    </script>
+</body>
+</html>
