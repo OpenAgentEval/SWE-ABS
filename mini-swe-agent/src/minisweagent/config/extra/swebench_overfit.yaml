@@ -1,0 +1,370 @@
+agent:
+  system_template: |
+    You are a helpful assistant that can interact multiple times with a computer shell to solve programming tasks.
+    Your response must contain exactly ONE bash code block with ONE command (or commands connected with && or ||).
+
+    Include a THOUGHT section before your command where you explain your reasoning process.
+    Format your response as shown in <format_example>.
+
+    <format_example>
+    THOUGHT: Your reasoning and analysis here
+
+    ```bash
+    your_command_here
+    ```
+    </format_example>
+
+    Failure to follow these rules will cause your response to be rejected.
+  instance_template: |
+    <pr_description>
+    Consider the following PR description:
+    {{task}}
+    </pr_description>
+
+    <instructions>
+    # Task Instructions
+
+    ## Overview
+    You're a software engineer interacting continuously with a computer by submitting commands.
+    You are given:
+    - A gold patch that fixes the issue
+    - A test_patch that was generated to verify the fix, but may be **overfitting** the gold patch
+
+    There is a gold patch that is used to fix the issue.
+      --- 
+      {{gold_patch}}
+      --- 
+
+    Test Patch (to be reviewed and fixed):  
+      ---  
+      {{model_test_patch}}  
+      --- 
+    Test execution in this repository: {{test_command}}
+
+    IMPORTANT: 
+    - This is an interactive process where you will think and issue ONE command, see its result, then think and issue your next command.
+    - {{workdir}} is the working directory for all your subsequent commands.
+    - Gold patch and test patch are already apply to the given repository.
+    - Test execution command example in this repository: {{test_command}}
+    - Do not use other test command, do not run the full test suite
+        
+    ## Background
+
+    Many agent-submitted patches only fix the surface symptom described in the issue,
+    without addressing deeper implicit requirements (e.g. edge cases, related constraints,
+    error propagation paths). Such patches pass weak tests but do not fully resolve the problem.
+
+    The test_patch was generated to be stronger and more comprehensive than the original
+    gold test, in order to kill these incomplete patches. The gold patch is typically
+    thorough — it handles implicit requirements that go beyond the literal issue description.
+    Tests that cover these deeper correctness requirements are **valuable and expected**.
+
+    Your job is to identify assertions that overfit the gold patch's **specific implementation
+    choices**, rather than its **fix intent** — and repair them so that any equally complete
+    and correct fix would also pass.
+
+    The core question for every assertion:
+    > **Does this assertion verify that the problem is thoroughly solved,
+    > or does it verify that the gold patch's specific approach was used?**
+
+    ## General Principles
+
+    - Asserting implementation details is **NOT automatically overfitting**.
+      An assertion on an internal value is acceptable if it encodes a
+      **necessary semantic invariant** (e.g. relative ordering, bounds, monotonicity)
+      rather than a specific implementation choice.
+    - A test is **NOT overfitting** merely because it exercises code added by the gold patch.
+    - Tests that cover deeper conditions implied by the issue (but not explicitly stated)
+      are **not overfitting** — they are the intended discriminative power of the test suite.
+    - Pure behavior-level tests — those that remain valid under any equally complete fix —
+      should be kept unchanged.
+
+    ## Typical Overfitting Signals
+
+    **Value and Format Coupling:**
+    - Hard-coded exact full error message strings (acceptable: checking exception type or key semantic substrings)
+    - Magic numbers with no semantic meaning (acceptable: boundary values, length constraints, meaningful counts)
+    - Dependence on output formatting, indentation, newlines, or ordering that does not affect correctness
+    - Exact matching of SQL queries, URLs, or serialized strings rather than verifying semantic equivalence
+
+    **Internal Implementation Coupling:**
+    - Assertions on specific internal attribute names, private method call counts, or call order
+    - Checking intermediate computation results rather than final observable outputs or state
+    - Depending on specific data structures, field names, or class names introduced by the gold patch
+    - Asserting on the exact number of side effects (e.g. DB query count, cache hits, log entries)
+
+    **Implementation Choice Binding:**
+    - Asserting constraints that the gold patch introduced for implementation convenience,
+      not because the fix itself requires them
+    - Asserting the **absence** of a behavior that could legitimately exist under an alternative correct fix
+    - Testing a specific error-handling path rather than the observable outcome of that error condition
+
+    ## Workflow for Repairing Overfitting Assertions
+
+    For each assertion in test_patch that may overfit the gold patch, follow this workflow **step by step**:
+
+    1. **Assess Gold Patch Necessity**
+      - Examine each change or addition in the gold patch.
+      - Determine whether it addresses:
+        - Behavior correctness
+        - Safety and error prevention
+        - Boundary/edge cases implied by the issue
+        - Deeper implicit requirements not stated in the issue description
+      - Note: the gold patch may handle more than the issue literally describes — this is intentional.
+      - This step is **analysis only**; do not modify any tests yet.
+
+    2. **Identify Overfitting Assertions**
+      - For each assertion, ask: does it test **fix intent** (the problem is solved) or
+        **implementation choice** (the gold patch's specific approach was used)?
+      - Use the Typical Overfitting Signals above as a checklist.
+      - Ignore assertions that only exercise gold-patch code paths without enforcing
+        implementation-specific behavior.
+
+    3. **Repair First**
+      - Attempt to relax the assertion into a **semantic constraint** without losing discriminative power.
+      - Examples include:
+        - Range checks instead of exact values
+        - Relative comparisons instead of absolute ones
+        - Substring or type checks instead of exact string matching
+        - Property-based conditions instead of specific counts
+      - When relaxing, preserve the gold patch's necessity, edge cases, and safety implications.
+
+    4. **Preserve Intent and Discriminative Power**
+      - Infer the original intent of the assertion (including any comments).
+      - Identify which **semantic constraints** it encodes:
+        - Necessity, minimality, upper/lower bounds, relative ordering
+      - Ensure the relaxed assertion:
+        - Preserves these constraints as much as possible
+        - Does **not collapse into a trivial or overly weak check**
+        - Retains **sufficient discriminative power** to distinguish correct from incorrect behavior
+
+    5. **Remove Only if Repair is Impossible**
+      - Remove the assertion **only if** no meaningful semantic constraint can be expressed.
+      - Deletion is always the last resort, after careful evaluation.
+
+    6. **Validation**
+      - Keep changes minimal and preserve the original test intent.
+      - Run the provided test command to ensure all tests pass with the gold patch applied.
+
+    > Follow this workflow **step by step for every candidate assertion**,
+    > analyzing gold patch necessity before making any modification.
+
+
+
+    ## Command Execution Rules
+    You are operating in an environment where
+    1. You write a single command
+    2. The system executes that command in a subshell
+    3. You see the result
+    4. You write your next command
+
+    Each response should include:
+    1. A **THOUGHT** section where you explain your reasoning and plan
+    2. A single bash code block with your command
+
+    Format your responses like this:
+
+    <format_example>
+    THOUGHT: Here I explain my reasoning process, analysis of the current situation,
+    and what I'm trying to accomplish with the command below.
+
+    ```bash
+    your_command_here
+    ```
+    </format_example>
+
+    Commands must be specified in a single bash code block:
+
+    ```bash
+    your_command_here
+    ```
+
+    **CRITICAL REQUIREMENTS:**
+    - Your response SHOULD include a THOUGHT section explaining your reasoning
+    - Your response MUST include EXACTLY ONE bash code block
+    - This bash block MUST contain EXACTLY ONE command (or a set of commands connected with && or ||)
+    - If you include zero or multiple bash blocks, or no command at all, YOUR RESPONSE WILL FAIL
+    - Do NOT try to run multiple independent commands in separate blocks in one response
+    - Directory or environment variable changes are not persistent. Every action is executed in a new subshell.
+    - However, you can prefix any action with `MY_ENV_VAR=MY_VALUE cd /path/to/working/dir && ...` or write/load environment variables from files
+
+    Example of a CORRECT response:
+    <example_response>
+    THOUGHT: I need to understand the structure of the repository first. Let me check what files are in the current directory to get a better understanding of the codebase.
+
+    ```bash
+    ls -la
+    ```
+    </example_response>
+
+    Example of an INCORRECT response:
+    <example_response>
+    THOUGHT: I need to examine the codebase and then look at a specific file. I'll run multiple commands to do this.
+
+    ```bash
+    ls -la
+    ```
+
+    Now I'll read the file:
+
+    ```bash
+    cat file.txt
+    ```
+    </example_response>
+
+    If you need to run multiple commands, either:
+    1. Combine them in one block using && or ||
+    ```bash
+    command1 && command2 || echo "Error occurred"
+    ```
+
+    2. Wait for the first command to complete, see its output, then issue the next command in your following response.
+
+    ## Environment Details
+    - You have a full Linux shell environment
+    - Always use non-interactive flags (-y, -f) for commands
+    - Avoid interactive tools like vi, nano, or any that require user input
+    - If a command isn't available, you can install it
+
+    ## Useful Command Examples
+
+    ### Create a new file:
+    ```bash
+    cat <<'EOF' > newfile.py
+    import numpy as np
+    hello = "world"
+    print(hello)
+    EOF
+    ```
+    Recommended use: 
+    Do not add && or other commands after EOF. This can cause syntax errors due to improper command chaining.
+    Do not add && or other commands after EOF. This can cause syntax errors due to improper command chaining.
+    But remember to add ``` at the new line.
+
+    ### excute python code directly:
+    ```bash
+    cd {{workdir}} && python - <<'PY'
+    print("Hello, world!")
+    PY 
+    ```
+    Recommended use: 
+    Do not add && or other commands after EOF. This can cause syntax errors due to improper command chaining. 
+    Do not add && or other commands after EOF. This can cause syntax errors due to improper command chaining.
+    But remember to add ``` at the new line.
+
+    ### Edit files with sed:
+    ```bash
+    # Replace all occurrences
+    sed -i 's/old_string/new_string/g' filename.py
+
+    # Replace only first occurrence
+    sed -i 's/old_string/new_string/' filename.py
+
+    # Replace first occurrence on line 1
+    sed -i '1s/old_string/new_string/' filename.py
+
+    # Replace all occurrences in lines 1-10
+    sed -i '1,10s/old_string/new_string/g' filename.py
+    ```
+
+    ### View file content:
+    ```bash
+    # View specific lines with numbers
+    nl -ba filename.py | sed -n '10,20p'
+    ```
+
+    ### Any other command you want to run
+    ```bash
+    anything
+    ```
+
+    ## Submission
+    Before submitting, you MUST execute the following Git command to inspect the modified files.
+    You MUST use this command (or an equivalent one that only lists file names and does not show diffs):
+
+    ```bash
+    git status --short
+    ```
+    Based on the output of this command, you MUST remove any unnecessary or temporary generated files
+    (e.g., cache files, logs, build artifacts, or intermediate outputs).
+
+    You MUST repeat the file-listing step if files are removed, until only intended changes remain.
+
+    Only after completing the cleanup and when no further progress can be made,
+    you may issue EXACTLY the following command.
+
+    IMPORTANT:
+    The final submission command MUST be sent as a standalone instruction and MUST NOT be combined with any other instructions.
+
+    ```bash
+    cd {{workdir}} && echo COMPLETE_TASK_AND_SUBMIT_FINAL_OUTPUT && git add -A && git diff --cached
+    ```
+
+    This command will submit your work.
+    You cannot continue working (reading, editing, testing) in any way on this task after submitting.
+    </instructions>
+  action_observation_template: |
+    <returncode>{{output.returncode}}</returncode>
+    {% if output.output | length < 10000 -%}
+    <output>
+    {{ output.output -}}
+    </output>
+    {%- else -%}
+    <warning>
+    The output of your last command was too long.
+    Please try a different command that produces less output.
+    If you're looking at a file you can try use head, tail or sed to view a smaller number of lines selectively.
+    If you're using grep or find and it produced too much output, you can use a more selective search pattern.
+    If you really need to see something from the full command's output, you can redirect output to a file and then search in that file.
+    </warning>
+    {%- set elided_chars = output.output | length - 10000 -%}
+    <output_head>
+    {{ output.output[:5000] }}
+    </output_head>
+    <elided_chars>
+    {{ elided_chars }} characters elided
+    </elided_chars>
+    <output_tail>
+    {{ output.output[-5000:] }}
+    </output_tail>
+    {%- endif -%}
+  format_error_template: |
+    Your command did not complete successfully. You may have forgotten to place the closing triple backticks (```) on a new line at the end of your command.
+
+    Please always provide EXACTLY ONE action in triple backticks, found {{actions|length}} actions.
+
+    Please format your action in triple backticks as shown in <response_example>.
+
+    <response_example>
+    Here are some thoughts about why you want to perform the action.
+
+    ```bash
+    <action>
+    ```
+    </response_example>
+
+    If you have completed your assignment, please consult the first message about how to
+    submit your solution (you will not be able to continue working on this task after that).
+
+
+  step_limit: 70
+  cost_limit: 1.
+
+environment:
+  cwd: "/testbed"
+  timeout: 60
+  env:
+    PAGER: cat
+    MANPAGER: cat
+    LESS: -R
+    PIP_PROGRESS_BAR: 'off'
+    TQDM_DISABLE: '1'
+    # platform: "linux/arm64"
+  environment_class: docker
+
+model:
+  model_name: "openai/gpt-5"
+  model_kwargs:
+    drop_params: true
+    temperature: 0.0
+

@@ -1,0 +1,111 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sweabs-utils"
+version = "0.1.0"
+description = "SWE-ABS: Shared utilities for mini-swe-agent, swe-bench, and swe-bench-pro"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+    {name = "SWE-ABS Team"},
+]
+keywords = ["nlp", "agents", "code", "benchmark", "swe-bench", "swe-abs"]
+license = {text = "MIT"}
+
+# Core dependencies required by sweabs_utils package
+dependencies = [
+    "datasets>=4.4.2",
+    "docker>=7.1.0",
+    "python-dotenv>=1.0.0",
+    "unidiff>=0.7.5",
+    "pyyaml",
+    "requests",
+    "scipy",
+]
+
+[project.optional-dependencies]
+# Dependencies for mini-swe-agent
+mini-swe-agent = [
+    "jinja2",
+    "litellm >= 1.75.5",
+    "tenacity",
+    "rich",
+    "typer",
+    "platformdirs",
+    "textual",
+    "prompt_toolkit",
+    "openai != 1.100.0,!=1.100.1",
+]
+
+# Dependencies for swe-bench
+swebench = [
+    "beautifulsoup4",
+    "chardet",
+    "ghapi",
+    "GitPython",
+    "modal",
+    "pre-commit",
+    "rich",
+    "tenacity",
+    "tqdm",
+    "tree-sitter>=0.23.0",
+    "tree-sitter-python>=0.23.0",
+    "tree-sitter-go>=0.23.0",
+    "tree-sitter-javascript>=0.23.0",
+    "tree-sitter-typescript>=0.23.0",
+]
+
+# Dependencies for swe-bench-pro
+swe-bench-pro = [
+    # Additional dependencies for Pro version (if any)
+]
+
+# Development dependencies
+dev = [
+    "pytest",
+    "pytest-cov",
+    "pytest-asyncio",
+    "pytest-xdist",
+    "pre-commit",
+    "ruff",
+]
+
+# Install everything
+all = [
+    "sweabs-utils[mini-swe-agent]",
+    "sweabs-utils[swebench]",
+    "sweabs-utils[swe-bench-pro]",
+    "sweabs-utils[dev]",
+]
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["sweabs_utils", "sweabs_utils.*"]
+
+[tool.setuptools.package-data]
+sweabs_utils = ["*.md"]
+
+[tool.ruff]
+exclude = [
+    ".git",
+    ".venv",
+    "venv",
+    "build",
+    "dist",
+    "__pycache__",
+    "mini-swe-agent",
+    "swe-bench",
+    "SWE-bench_Pro-os",
+]
+line-length = 120
+indent-width = 4
+target-version = "py310"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["test"]

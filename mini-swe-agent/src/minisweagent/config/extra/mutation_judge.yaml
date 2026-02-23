@@ -1,0 +1,134 @@
+agent:
+  system_template: |
+    You are a highly experienced software developer tasked with evaluating the quality of a Mutation in a codebase.
+
+  instance_template: |
+    You will receive the following four parts:
+
+    1. GitHub Issue Description — Background of the problem and the fix objective;
+    2. Gold Patch — The official or correct fix patch;
+    3. Test Patch — The tests added to verify the fix;
+    4. Mutation — A small code change introduced based on the gold patch, which has passed all the new tests.
+
+    Your task is to evaluate whether this Mutation is a high-quality surviving mutant.
+
+    #### Step 1: Difference Identification (Difference Analysis)
+
+    First, compare the Mutation and Gold Patch,
+    Summarize their differences (such as added/removed/modified logic, comments, condition checks, function calls, etc.).
+    The output should include:
+
+     - Modified Lines (you can reference the key context)
+     - Change Type (Added/Modified/Deleted)
+     - A brief explanation of the semantic change or lack thereof (e.g., "only a comment difference," "condition branch logic adjustment")
+
+    #### Step 2: In-depth Evaluation (Structured Evaluation)
+
+    1. Relevance to the Issue (Relevance)
+      - Does the Mutation modify the part of the code related to the Issue fix?
+      - Does it still fall within the scope of the Issue's logic (e.g., the same function, path, or input conditions)?
+      - If it is a mutation to a parameter, does the issue explicitly or implicitly specify the original value of that parameter? If not, then it is irrelevant.
+      - If it's unrelated (e.g., just style or comment changes), its relevance is low.
+
+
+    2. Does it constitute a valid mutation? (Mutation Validity)
+      - Does the **Mutation** introduce a semantic difference compared to the **Gold Patch**?
+      - Is this change likely to alter behavior in certain scenarios and potentially cause a functional bug, or is it an equivalent mutation?
+      - Can this difference reveal a blind spot in the test suite?
+      - A high-quality surviving mutant should meet the following criteria:
+        * The functionality is mostly correct, but with slight semantic deviation.
+        * The test suite did not detect it.
+        * It provides insight into potential test improvements.
+
+
+    ### Output Format (Please Follow This Exactly)
+    Difference Summary:
+      Briefly list all the logical differences between the **Gold Patch** and the **Mutation**.
+
+    Reasoning Analysis:
+      Relevance to the Issue:
+      Mutation Validity (Does it truly constitute a mutation?):
+      
+
+    Final Evaluation: Please output the final judgment in the following format, placed inside the <Answer></Answer> tag:
+    <Answer>
+    Relevance: Yes/No
+    Mutation Validity: Yes/No
+    </Answer>
+
+    ### Input Format
+
+    ```
+    ## Issue
+    {{issue}}
+
+    ## Test Patch
+    {{test_patch}}
+
+    ## Gold Patch
+    {{gold_patch}}
+
+    ## Mutation
+    {{mutation}}
+    ```
+
+  action_observation_template: |
+    <returncode>{{output.returncode}}</returncode>
+    {% if output.output | length < 10000 -%}
+    <output>
+    {{ output.output -}}
+    </output>
+    {%- else -%}
+    <warning>
+    The output of your last command was too long.
+    Please try a different command that produces less output.
+    If you're looking at a file you can try use head, tail or sed to view a smaller number of lines selectively.
+    If you're using grep or find and it produced too much output, you can use a more selective search pattern.
+    If you really need to see something from the full command's output, you can redirect output to a file and then search in that file.
+    </warning>
+    {%- set elided_chars = output.output | length - 10000 -%}
+    <output_head>
+    {{ output.output[:5000] }}
+    </output_head>
+    <elided_chars>
+    {{ elided_chars }} characters elided
+    </elided_chars>
+    <output_tail>
+    {{ output.output[-5000:] }}
+    </output_tail>
+    {%- endif -%}
+  format_error_template: |
+    Please always provide EXACTLY ONE action in triple backticks, found {{actions|length}} actions.
+
+    Please format your action in triple backticks as shown in <response_example>.
+
+    <response_example>
+    Here are some thoughts about why you want to perform the action.
+
+    ```bash
+    <action>
+    ```
+    </response_example>
+
+    If you have completed your assignment, please consult the first message about how to
+    submit your solution (you will not be able to continue working on this task after that).
+  step_limit: 100
+  cost_limit: 2.
+
+environment:
+  cwd: "/testbed"
+  timeout: 60
+  env:
+    PAGER: cat
+    MANPAGER: cat
+    LESS: -R
+    PIP_PROGRESS_BAR: 'off'
+    TQDM_DISABLE: '1'
+  environment_class: docker
+
+model:
+  model_name: "openai/gpt-5"
+  model_kwargs:
+    drop_params: true
+    temperature: 0.8
+

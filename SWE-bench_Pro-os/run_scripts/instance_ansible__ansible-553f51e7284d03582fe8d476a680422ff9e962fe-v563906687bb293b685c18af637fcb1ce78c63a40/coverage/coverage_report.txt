@@ -1,0 +1,41 @@
+WARNING: Ignored 46 characters from 1 invalid coverage path(s).
+Name                                                                           Stmts   Miss Branch BrPart  Cover
+----------------------------------------------------------------------------------------------------------------
+lib/ansible/module_utils/__init__.py                                               0      0      0      0   100%
+lib/ansible/module_utils/_text.py                                                  6      0      0      0   100%
+lib/ansible/module_utils/basic.py                                               1214   1042    553      1    11%
+lib/ansible/module_utils/common/__init__.py                                        0      0      0      0   100%
+lib/ansible/module_utils/common/_json_compat.py                                    9      3      2      1    64%
+lib/ansible/module_utils/common/_utils.py                                         14     10      8      0    18%
+lib/ansible/module_utils/common/arg_spec.py                                      120     98     34      0    18%
+lib/ansible/module_utils/common/collections.py                                    52     33     14      0    29%
+lib/ansible/module_utils/common/file.py                                           28      8      4      0    62%
+lib/ansible/module_utils/common/locale.py                                         29     25     16      0     9%
+lib/ansible/module_utils/common/parameters.py                                    448    411    316      0     5%
+lib/ansible/module_utils/common/process.py                                        26     21     16      0    12%
+lib/ansible/module_utils/common/sys_info.py                                       60     50     40      0    10%
+lib/ansible/module_utils/common/text/__init__.py                                   0      0      0      0   100%
+lib/ansible/module_utils/common/text/converters.py                               112     93     74      1    11%
+lib/ansible/module_utils/common/text/formatters.py                                57     49     27      0    10%
+lib/ansible/module_utils/common/validation.py                                    263    231    174      0     7%
+lib/ansible/module_utils/common/warnings.py                                       19     10      6      0    36%
+lib/ansible/module_utils/compat/__init__.py                                        0      0      0      0   100%
+lib/ansible/module_utils/compat/selectors.py                                      17      6      2      1    63%
+lib/ansible/module_utils/compat/selinux.py                                        62     29     15      2    55%
+lib/ansible/module_utils/distro/__init__.py                                       16      3      4      1    70%
+lib/ansible/module_utils/distro/_distro.py                                       335    237    134      3    26%
+lib/ansible/module_utils/errors.py                                                46     13      8      0    72%
+lib/ansible/module_utils/parsing/__init__.py                                       0      0      0      0   100%
+lib/ansible/module_utils/parsing/convert_bool.py                                  18     10     10      0    29%
+lib/ansible/module_utils/pycompat24.py                                             7      1      0      0    86%
+lib/ansible/module_utils/six/__init__.py                                         505    255    166     19    44%
+test/lib/ansible_test/_util/target/pytest/plugins/ansible_forked.py               55     25     26      2    47%
+test/lib/ansible_test/_util/target/pytest/plugins/ansible_pytest_coverage.py      44     16     18      5    60%
+test/units/__init__.py                                                             0      0      0      0   100%
+test/units/module_utils/__init__.py                                                0      0      0      0   100%
+test/units/module_utils/conftest.py                                               50     36     20      0    26%
+test/units/module_utils/test_text.py                                              14      0      0      0   100%
+----------------------------------------------------------------------------------------------------------------
+TOTAL                                                                           3626   2715   1687     36    20%
+WARNING: Reviewing previous 1 warning(s):
+WARNING: Ignored 46 characters from 1 invalid coverage path(s).
