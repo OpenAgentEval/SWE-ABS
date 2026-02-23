@@ -77,8 +77,6 @@ bash setup.sh
 
 Verify: `python test/test_cross_package_imports.py` → `Total: 5/5 tests passed`
 
-For detailed troubleshooting, see [INSTALLATION_GUIDE.md](INSTALLATION_GUIDE.md).
-
 ---
 
 ## Running the Pipelines
