@@ -70,8 +70,8 @@ SWE-ABS/
 ## Installation
 
 ```bash
-conda create -n SWE-ABS python=3.11
-conda activate SWE-ABS
+conda create -n swe-abs python=3.11
+conda activate swe-abs
 bash setup.sh
 ```
 
