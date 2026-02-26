@@ -1,5 +1,9 @@
 # SWE-ABS
 
+[![Leaderboard](https://img.shields.io/badge/🏆_Leaderboard-Live-blue?style=for-the-badge)](https://your-leaderboard-url.com)
+[![Dataset](https://img.shields.io/badge/🤗_Dataset-HuggingFace-yellow?style=for-the-badge)](https://huggingface.co/datasets/your-org/your-dataset)
+[![Paper](https://img.shields.io/badge/📄_Paper-arXiv-red?style=for-the-badge)](https://arxiv.org/abs/your-paper-id)
+
 **SWE-ABS** is an automated framework for constructing high-quality software engineering benchmarks. It generates test patches, produces mutation patches to challenge those tests, and validates them with augmented tests — providing a scalable pipeline for evaluating the abstract correctness of code fixes.
 
 ---
