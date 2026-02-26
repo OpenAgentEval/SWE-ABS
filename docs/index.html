@@ -467,7 +467,6 @@
         let filteredData = [];
         let currentFilter = 'all';
 
-        // 加载JSON数据
         async function loadData() {
             try {
                 const response = await fetch('swe_abs_data.json');
@@ -652,11 +651,11 @@
             const searchTerm = document.getElementById('searchInput').value.toLowerCase();
 
             filteredData = data.filter(row => {
-                // 先应用搜索过滤
+
                 const matchesSearch = row.model.toLowerCase().includes(searchTerm) || row.date.includes(searchTerm);
                 if (!matchesSearch) return false;
 
-                // 再应用分类过滤
+
                 const rankChange = row.oldRank - row.newRank;
                 switch (filterType) {
                     case 'rank-up':
@@ -692,7 +691,6 @@
             });
         });
 
-        // 页面加载时加载数据
         window.addEventListener('DOMContentLoaded', loadData);
     </script>
 </body>
