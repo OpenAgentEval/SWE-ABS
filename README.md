@@ -1,6 +1,6 @@
 # SWE-ABS
 
-[![Leaderboard](https://img.shields.io/badge/🏆_Leaderboard-Live-blue?style=for-the-badge)](https://your-leaderboard-url.com)
+[![Leaderboard](https://img.shields.io/badge/🏆_Leaderboard-Live-blue?style=for-the-badge)](https://boxiyu.github.io/SWE-ABS/)
 [![Dataset](https://img.shields.io/badge/🤗_Dataset-HuggingFace-yellow?style=for-the-badge)](https://huggingface.co/datasets/OpenAgentLab/SWE-ABS)
 [![Paper](https://img.shields.io/badge/📄_Paper-arXiv-red?style=for-the-badge)](https://arxiv.org/abs/your-paper-id)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
