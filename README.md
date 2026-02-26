@@ -1,7 +1,7 @@
 # SWE-ABS
 
 [![Leaderboard](https://img.shields.io/badge/🏆_Leaderboard-Live-blue?style=for-the-badge)](https://openagenteval.github.io/SWE-ABS/)
-[![Dataset](https://img.shields.io/badge/🤗_Dataset-HuggingFace-yellow?style=for-the-badge)](https://huggingface.co/datasets/OpenAgentLab/SWE-ABS)
+[![Dataset](https://img.shields.io/badge/🤗_SWE--ABS_Verified-HuggingFace-yellow?style=for-the-badge)](https://huggingface.co/datasets/OpenAgentLab/SWE-ABS)
 [![Paper](https://img.shields.io/badge/📄_Paper-arXiv-red?style=for-the-badge)](https://arxiv.org/abs/your-paper-id)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 [![Discord](https://img.shields.io/badge/Discord-Join-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/Cznaz5gE)
