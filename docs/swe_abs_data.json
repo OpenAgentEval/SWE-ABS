@@ -2,7 +2,7 @@
   "metadata": {
     "totalModels": 30,
     "totalInstances": 500,
-    "generatedAt": "2026-02-22T02:00:32.521030"
+    "generatedAt": "2026-02-28T04:16:56.509968"
   },
   "data": [
     {
@@ -36,7 +36,7 @@
       "sweAbs": 61.2,
       "drop": 15.6,
       "oldRank": 3,
-      "newRank": 11,
+      "newRank": 8,
       "modelKey": "20250902_atlassian-rovo-dev",
       "oldCount": 384,
       "newCount": 306
@@ -60,7 +60,7 @@
       "sweAbs": 61.8,
       "drop": 14.6,
       "oldRank": 5,
-      "newRank": 7,
+      "newRank": 6,
       "modelKey": "20250819_ACoder",
       "oldCount": 382,
       "newCount": 309
@@ -114,28 +114,28 @@
       "newCount": 302
     },
     {
-      "date": "20250720",
-      "model": "Lingxi-v1.5_claude-4-sonnet-20250514",
-      "orig": 74.6,
-      "sweAbs": 60.6,
-      "drop": 14.0,
-      "oldRank": 10,
-      "newRank": 12,
-      "modelKey": "20250720_Lingxi-v1.5_claude-4-sonnet-20250514",
-      "oldCount": 373,
-      "newCount": 303
-    },
-    {
       "date": "20250915",
       "model": "JoyCode",
       "orig": 74.6,
       "sweAbs": 61.2,
       "drop": 13.4,
-      "oldRank": 11,
-      "newRank": 10,
+      "oldRank": 10,
+      "newRank": 9,
       "modelKey": "20250915_JoyCode",
       "oldCount": 373,
       "newCount": 306
+    },
+    {
+      "date": "20250720",
+      "model": "Lingxi-v1.5_claude-4-sonnet-20250514",
+      "orig": 74.6,
+      "sweAbs": 60.6,
+      "drop": 14.0,
+      "oldRank": 11,
+      "newRank": 12,
+      "modelKey": "20250720_Lingxi-v1.5_claude-4-sonnet-20250514",
+      "oldCount": 373,
+      "newCount": 303
     },
     {
       "date": "20250603",
@@ -174,40 +174,28 @@
       "newCount": 290
     },
     {
+      "date": "20251103",
+      "model": "Salesforce AI Research SAGE (OpenHands)",
+      "orig": 74.0,
+      "sweAbs": 61.6,
+      "drop": 12.4,
+      "oldRank": 15,
+      "newRank": 7,
+      "modelKey": "20251103_SalesforceAIResearch_SAGE_OpenHands",
+      "oldCount": 370,
+      "newCount": 308
+    },
+    {
       "date": "20251118",
       "model": "mini-SWE-agent + Gemini 3 Pro Preview (2025-11-18)",
       "orig": 74.0,
       "sweAbs": 56.8,
       "drop": 17.2,
-      "oldRank": 15,
-      "newRank": 23,
+      "oldRank": 16,
+      "newRank": 22,
       "modelKey": "20251118_mini-v1.15.0_gemini-3-pro-preview-20251118",
       "oldCount": 370,
       "newCount": 284
-    },
-    {
-      "date": "20251103",
-      "model": "Salesforce AI Research SAGE (OpenHands)",
-      "orig": 74.0,
-      "sweAbs": 61.8,
-      "drop": 12.2,
-      "oldRank": 16,
-      "newRank": 6,
-      "modelKey": "20251103_SalesforceAIResearch_SAGE_OpenHands",
-      "oldCount": 370,
-      "newCount": 309
-    },
-    {
-      "date": "20251021",
-      "model": "Salesforce AI Research SAGE (bash-only)",
-      "orig": 73.2,
-      "sweAbs": 61.2,
-      "drop": 12.0,
-      "oldRank": 17,
-      "newRank": 8,
-      "modelKey": "20251021_SalesforceAIResearch_SAGE_bash_only",
-      "oldCount": 366,
-      "newCount": 306
     },
     {
       "date": "20250522",
@@ -215,11 +203,23 @@
       "orig": 73.2,
       "sweAbs": 58.4,
       "drop": 14.8,
-      "oldRank": 18,
+      "oldRank": 17,
       "newRank": 15,
       "modelKey": "20250522_tools_claude-4-opus",
       "oldCount": 366,
       "newCount": 292
+    },
+    {
+      "date": "20251021",
+      "model": "Salesforce AI Research SAGE (bash-only)",
+      "orig": 73.2,
+      "sweAbs": 61.2,
+      "drop": 12.0,
+      "oldRank": 18,
+      "newRank": 10,
+      "modelKey": "20251021_SalesforceAIResearch_SAGE_bash_only",
+      "oldCount": 366,
+      "newCount": 306
     },
     {
       "date": "20250522",
@@ -240,7 +240,7 @@
       "sweAbs": 61.2,
       "drop": 10.6,
       "oldRank": 20,
-      "newRank": 9,
+      "newRank": 11,
       "modelKey": "20250807_openhands_gpt5",
       "oldCount": 359,
       "newCount": 306
@@ -248,14 +248,14 @@
     {
       "date": "20251211",
       "model": "mini-SWE-agent + GPT-5.2 (2025-12-11) (high reasoning)",
-      "orig": 71.8,
-      "sweAbs": 57.0,
+      "orig": 71.6,
+      "sweAbs": 56.8,
       "drop": 14.8,
       "oldRank": 21,
-      "newRank": 22,
+      "newRank": 23,
       "modelKey": "20251211_mini-v1.17.2_gpt-5.2-2025-12-11-high",
-      "oldCount": 359,
-      "newCount": 285
+      "oldCount": 358,
+      "newCount": 284
     },
     {
       "date": "20250715",
@@ -282,28 +282,28 @@
       "newCount": 288
     },
     {
-      "date": "20250710",
-      "model": "Bloop",
-      "orig": 71.2,
-      "sweAbs": 59.8,
-      "drop": 11.4,
-      "oldRank": 24,
-      "newRank": 14,
-      "modelKey": "20250710_bloop",
-      "oldCount": 356,
-      "newCount": 299
-    },
-    {
       "date": "20250929",
       "model": "Prometheus-v1.2 + GPT-5",
       "orig": 71.2,
       "sweAbs": 56.0,
       "drop": 15.2,
-      "oldRank": 25,
+      "oldRank": 24,
       "newRank": 26,
       "modelKey": "20250929_Prometheus_v1.2_gpt5",
       "oldCount": 356,
       "newCount": 280
+    },
+    {
+      "date": "20250710",
+      "model": "Bloop",
+      "orig": 71.0,
+      "sweAbs": 59.6,
+      "drop": 11.4,
+      "oldRank": 25,
+      "newRank": 14,
+      "modelKey": "20250710_bloop",
+      "oldCount": 355,
+      "newCount": 298
     },
     {
       "date": "20250623",
@@ -342,28 +342,28 @@
       "newCount": 271
     },
     {
-      "date": "20250929",
-      "model": "mini-SWE-agent + Claude 4.5 Sonnet (20250929)",
-      "orig": 70.4,
-      "sweAbs": 54.4,
-      "drop": 16.0,
-      "oldRank": 29,
-      "newRank": 28,
-      "modelKey": "20250929_mini-v1.13.3_sonnet-4-5-20250929",
-      "oldCount": 352,
-      "newCount": 272
-    },
-    {
       "date": "20250515",
       "model": "Refact.ai Agent",
       "orig": 70.4,
       "sweAbs": 54.8,
       "drop": 15.6,
-      "oldRank": 30,
+      "oldRank": 29,
       "newRank": 27,
       "modelKey": "20250515_Refact_Agent",
       "oldCount": 352,
       "newCount": 274
+    },
+    {
+      "date": "20250929",
+      "model": "mini-SWE-agent + Claude 4.5 Sonnet (20250929)",
+      "orig": 70.4,
+      "sweAbs": 54.4,
+      "drop": 16.0,
+      "oldRank": 30,
+      "newRank": 28,
+      "modelKey": "20250929_mini-v1.13.3_sonnet-4-5-20250929",
+      "oldCount": 352,
+      "newCount": 272
     }
   ]
 }
