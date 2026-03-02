@@ -4,7 +4,13 @@ vaild_model_path=$HOME/topk_swe_data
 # vaild_model_name=20250522_tools_claude-4-sonnet,20250522_tools_claude-4-opus
 # Get all filenames in the directory (non-hidden, non-directory), join as a comma-separated string
 vaild_model_name=$(ls "$vaild_model_path" | tr '\n' ',' | sed 's/,$//')
+
+# Option A: load test patches from a local preds.json produced by the SWE-ABS pipeline
 predictions_test_path=/path/to/preds.json
+
+# Option B: load test patches directly from HuggingFace (no local preds.json needed)
+# predictions_test_path=OpenAgentLab/SWE-Bench_Verified_ABS
+
 run_id=top30_pipline
 instance_ids=django__django-11206
 re_run_eval=True

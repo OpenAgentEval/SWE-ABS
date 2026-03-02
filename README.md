@@ -11,6 +11,44 @@
 
 ---
 
+
+---
+
+### HuggingFace Re-evaluation with SWE-ABS Data
+
+The SWE-ABS test patches are published on HuggingFace. You can use them to re-evaluate any coding agent without running the full SWE-ABS pipeline locally.
+
+```python
+from datasets import load_dataset
+dataset = load_dataset('OpenAgentLab/SWE-Bench_Verified_ABS', split='test')
+```
+
+Each instance contains the original SWE-bench fields. `test_patch` is replaced with the SWE-ABS-generated test patch; the original is preserved as `original_test_patch`.
+
+**Option A — Standard SWE-bench evaluation** (no code changes needed):
+
+```bash
+python -m swebench.harness.run_evaluation \
+    --dataset_name OpenAgentLab/SWE-Bench_Verified_ABS \
+    --predictions_path <path_to_predictions> \
+    --max_workers <num_workers> \
+    --run_id <run_id>
+```
+
+**Option B — Full leaderboard re-evaluation** with `eval_agent_leaderboard.sh`: pass the HuggingFace dataset name directly as `--predictions_test_path` instead of a local JSON file:
+
+```bash
+cd swe-bench
+python -m swebench.runtest.run_evaluation_test \
+    --predictions_test_path OpenAgentLab/SWE-Bench_Verified_ABS \
+    --vaild_model_path ~/topk_swe_data \
+    --vaild_model_name 20250807_openhands_gpt5,20250522_tools_claude-4-sonnet \
+    --run_id my_eval_run \
+    --max_workers 12 \
+    --timeout 120
+```
+
+
 ## Overview
 
 SWE-ABS consists of three sequential pipelines that transform raw SWE-bench instances into a validated benchmark:
@@ -193,6 +231,8 @@ python run_stage_mutation_aug.py \
 **Output**: `result/mutation_aug/{run-id}/preds_*_eval.json`
 
 See [Mutation Augmentation Guide (EN)](docs/mutation_aug_guide_en.md) · [中文](docs/mutation_aug_guide_zh.md)
+
+
 
 ---
 

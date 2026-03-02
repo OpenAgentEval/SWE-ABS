@@ -455,6 +455,28 @@ def update_agent_res(results_dict,result,instance_id):
 
 
 
+def load_predictions_from_hf(hf_dataset_name: str, split: str = "test") -> dict:
+    """Load predictions from a HuggingFace dataset and convert to the internal dict format.
+
+    The HuggingFace dataset (e.g. OpenAgentLab/SWE-Bench_Verified_ABS) stores
+    test_patch as the ABS-generated test and original_test_patch as the original
+    SWE-bench test, but does not carry model_test_patch or meta fields.
+    This function adds them back so the rest of the pipeline works unchanged.
+    """
+    from datasets import load_dataset
+    dataset = load_dataset(hf_dataset_name, split=split)
+    predictions = {}
+    for item in dataset:
+        instance_id = item["instance_id"]
+        instance = dict(item)
+        # test_patch in the HF dataset IS the ABS-generated test patch
+        instance[KEY_MODEL_TESTPATCH] = instance["test_patch"]
+        # mark every HF instance as having passed the gold patch (already validated)
+        instance["meta"] = {"pass_gold_patch_status": SUCCESS_STATUS}
+        predictions[instance_id] = instance
+    return predictions
+
+
 def filter_agent_exist(final_results_save_file, vaild_model_name):
     with open(final_results_save_file, "r") as f:
         results_dict = json.load(f)
@@ -529,7 +551,8 @@ def main(
         with open(predictions_test_path, "r") as f:
             all_predictions_test = json.load(f)
     else:
-        raise ValueError("Invalid predictions_test_path")
+        # treat as a HuggingFace dataset name (e.g. OpenAgentLab/SWE-Bench_Verified_ABS)
+        all_predictions_test = load_predictions_from_hf(predictions_test_path)
 
 
     predictions_test = copy.deepcopy(all_predictions_test)
