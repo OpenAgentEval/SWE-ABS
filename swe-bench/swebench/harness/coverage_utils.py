@@ -473,12 +473,12 @@ def compute_coverage(output_path, modified_related_lines, use_key = "exe_slice_l
 if __name__ == "__main__":
     from swebench.harness.code_analysis import get_analyzer
 
-    old_file = '/home/ddq/CaoYang/SWE-PLUS/swe-bench/swe_plus_res/modified_raleted_lines/final_results.json'
+    old_file = 'SWE-ABS/swe-bench/swe_plus_res/modified_raleted_lines/final_results.json'
     with open(old_file, 'r') as f:
         old_lines = json.load(f)
 
     instance_id = 'sympy__sympy-24562'
-    instance_path = Path(f"/home/ddq/CaoYang/SWE-PLUS/swe-bench/logs/extract_line_number/validate-gold/{instance_id}")
+    instance_path = Path(f"SWE-ABS/swe-bench/logs/extract_line_number/validate-gold/{instance_id}")
     
     patch_file = instance_path / "patch.diff"
     log_file = instance_path / "run_instance.log"

@@ -18,7 +18,7 @@ from minisweagent.utils.parser_utils import get_test_directives
 
 # SWE-bench Pro test command mapping cache
 _SWEBENCHPRO_TEST_CMD_CACHE: dict[str, str] | None = None
-_SWEBENCHPRO_TEST_CMD_PATH = Path("/home/ddq/CaoYang/SWE-PLUS/SWE-bench_Pro-os/test_commands_clean.json")
+_SWEBENCHPRO_TEST_CMD_PATH = Path("SWE-ABS/SWE-bench_Pro-os/test_commands_clean.json")
 
 
 class BenchmarkConfig(ABC):
@@ -226,7 +226,7 @@ def get_sb_environment(config: dict, instance: dict, benchmark_type: BenchMarkTy
 
 if __name__ == "__main__":
 
-    file = '/home/ddq/CaoYang/SWE-PLUS/mini-swe-agent/result/model_gen_test/pro_selecet_141/preds.json'
+    file = 'SWE-ABS/mini-swe-agent/result/model_gen_test/pro_selecet_141/preds.json'
 
 
     instance_id = 'instance_element-hq__element-web-4c6b0d35add7ae8d58f71ea1711587e31081444b-vnan'

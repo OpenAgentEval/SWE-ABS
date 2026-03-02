@@ -176,7 +176,7 @@ if __name__ == "__main__":
     # Test code remains unchanged
     import json
 
-    file = '/home/ddq/CaoYang/SWE-PLUS/mini-swe-agent/result/mutation_aug/pro_selecet_135_aug/preds_no_equ_mutation_aug_1.json'
+    file = 'SWE-ABS/mini-swe-agent/result/mutation_aug/pro_selecet_135_aug/preds_no_equ_mutation_aug_1.json'
     instance_id = 'instance_navidrome__navidrome-3f2d24695e9382125dfe5e6d6c8bbeb4a313a4f9'
 
     with open(file, "r") as f:

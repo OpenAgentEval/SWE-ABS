@@ -618,7 +618,7 @@ def compute_coverage(output_path, modified_related_lines, use_key = "exe_slice_l
 # ---------- Example usage ----------
 if __name__ == "__main__":
     instance_id = 'sympy__sympy-24562'
-    instance_path = Path(f"/home/ddq/CaoYang/SWE-PLUS/swe-bench/logs/extract_line_number/validate-gold/{instance_id}")
+    instance_path = Path(f"SWE-ABS/swe-bench/logs/extract_line_number/validate-gold/{instance_id}")
     
 
     patch_file = instance_path / "patch.diff"

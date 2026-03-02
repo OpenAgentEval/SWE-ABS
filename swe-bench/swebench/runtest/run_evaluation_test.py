@@ -228,7 +228,7 @@ def run_instance(
             # Remove conflicting parts between model_patch and model_test_patch
             model_test_patch = prediction[KEY_MODEL_TESTPATCH]
 
-            # with open("/home/ddq/CaoYang/SWE-PLUS/swe-bench/tool_script/patch.diff", "w") as f:
+            # with open("SWE-ABS/swe-bench/tool_script/patch.diff", "w") as f:
             #     f.write(model_patch)
 
             model_patch = remove_conflicting_chunks(model_patch, model_test_patch)

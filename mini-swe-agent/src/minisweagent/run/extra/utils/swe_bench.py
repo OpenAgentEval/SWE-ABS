@@ -138,7 +138,7 @@ def git_apply(env, code_patch: str, patch_path: str = "patch.diff", workdir: str
 
 #     from pathlib import Path
 
-#     traj_path = Path("/home/ddq/CaoYang/SWE-PLUS/mini-swe-agent/result/model_gen_test/pro_0_100/traj/gen_0")
+#     traj_path = Path("SWE-ABS/mini-swe-agent/result/model_gen_test/pro_0_100/traj/gen_0")
 #     instance_id = 'instance_gravitational__teleport-c782838c3a174fdff80cafd8cd3b1aa4dae8beb2'
 
 

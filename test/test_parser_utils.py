@@ -12,102 +12,102 @@ import sys
 from pathlib import Path
 
 print("=" * 60)
-print("测试 parser_utils 重构")
+print("Testing parser_utils refactoring")
 print("=" * 60)
 
 # ========== Test 1: Direct import of util/parser_utils ==========
-print("\n[测试 1] 直接导入 util/parser_utils")
+print("\n[Test 1] Direct import of util/parser_utils")
 try:
     sys.path.insert(0, str(Path(__file__).parent.parent / "util"))
     import parser_utils as util_parser
 
     # Test basic functions
-    assert hasattr(util_parser, 'str2bool'), "缺少 str2bool"
-    assert hasattr(util_parser, 'read_list_file'), "缺少 read_list_file"
-    assert hasattr(util_parser, 'get_test_directives'), "缺少 get_test_directives"
-    assert hasattr(util_parser, 'remove_conflicting_chunks'), "缺少 remove_conflicting_chunks"
+    assert hasattr(util_parser, 'str2bool'), "Missing str2bool"
+    assert hasattr(util_parser, 'read_list_file'), "Missing read_list_file"
+    assert hasattr(util_parser, 'get_test_directives'), "Missing get_test_directives"
+    assert hasattr(util_parser, 'remove_conflicting_chunks'), "Missing remove_conflicting_chunks"
 
     # Test constants
-    assert hasattr(util_parser, 'LANGUAGE_TEST_EXTENSIONS'), "缺少 LANGUAGE_TEST_EXTENSIONS"
-    assert hasattr(util_parser, 'FILTER_DIRS'), "缺少 FILTER_DIRS"
+    assert hasattr(util_parser, 'LANGUAGE_TEST_EXTENSIONS'), "Missing LANGUAGE_TEST_EXTENSIONS"
+    assert hasattr(util_parser, 'FILTER_DIRS'), "Missing FILTER_DIRS"
 
-    print("✅ util/parser_utils.py 导入成功")
-    print(f"   - 包含函数: str2bool, read_list_file, get_test_directives, etc.")
-    print(f"   - 包含常量: LANGUAGE_TEST_EXTENSIONS, FILTER_DIRS, etc.")
+    print("✅ util/parser_utils.py imported successfully")
+    print(f"   - Contains functions: str2bool, read_list_file, get_test_directives, etc.")
+    print(f"   - Contains constants: LANGUAGE_TEST_EXTENSIONS, FILTER_DIRS, etc.")
 
 except Exception as e:
-    print(f"❌ util/parser_utils.py 导入失败: {e}")
+    print(f"❌ util/parser_utils.py import failed: {e}")
     import traceback
     traceback.print_exc()
     sys.exit(1)
 
 # ========== Test 2: Import parser_utils from mini-swe-agent ==========
-print("\n[测试 2] 导入 mini-swe-agent/parser_utils")
+print("\n[Test 2] Import mini-swe-agent/parser_utils")
 try:
     sys.path.insert(0, str(Path(__file__).parent.parent / "mini-swe-agent" / "src"))
     from minisweagent.utils import parser_utils as mini_parser
 
     # Test functions imported from util
-    assert hasattr(mini_parser, 'str2bool'), "缺少 str2bool"
-    assert hasattr(mini_parser, 'get_test_directives'), "缺少 get_test_directives"
+    assert hasattr(mini_parser, 'str2bool'), "Missing str2bool"
+    assert hasattr(mini_parser, 'get_test_directives'), "Missing get_test_directives"
 
     # Test dedicated functions
-    assert hasattr(mini_parser, 'is_strict_def_or_class'), "缺少 is_strict_def_or_class"
-    assert hasattr(mini_parser, 'clean_full_diff'), "缺少 clean_full_diff"
+    assert hasattr(mini_parser, 'is_strict_def_or_class'), "Missing is_strict_def_or_class"
+    assert hasattr(mini_parser, 'clean_full_diff'), "Missing clean_full_diff"
 
-    print("✅ mini-swe-agent/parser_utils 导入成功")
-    print(f"   - 公共函数: str2bool, get_test_directives, etc.")
-    print(f"   - 专用函数: is_strict_def_or_class, clean_full_diff, etc.")
+    print("✅ mini-swe-agent/parser_utils imported successfully")
+    print(f"   - Shared functions: str2bool, get_test_directives, etc.")
+    print(f"   - Dedicated functions: is_strict_def_or_class, clean_full_diff, etc.")
 
 except Exception as e:
-    print(f"❌ mini-swe-agent/parser_utils 导入失败: {e}")
+    print(f"❌ mini-swe-agent/parser_utils import failed: {e}")
     import traceback
     traceback.print_exc()
     sys.exit(1)
 
 # ========== Test 3: Import parser_util from Pro-os ==========
-print("\n[测试 3] 导入 SWE-bench_Pro-os/parser_util")
+print("\n[Test 3] Import SWE-bench_Pro-os/parser_util")
 try:
     sys.path.insert(0, str(Path(__file__).parent.parent / "SWE-bench_Pro-os"))
     from utils import parser_util as pro_parser
 
     # Test functions imported from util
-    assert hasattr(pro_parser, 'str2bool'), "缺少 str2bool"
-    assert hasattr(pro_parser, 'get_test_directives'), "缺少 get_test_directives"
+    assert hasattr(pro_parser, 'str2bool'), "Missing str2bool"
+    assert hasattr(pro_parser, 'get_test_directives'), "Missing get_test_directives"
 
     # Test dedicated functions
-    assert hasattr(pro_parser, 'analyze_test_results'), "缺少 analyze_test_results"
+    assert hasattr(pro_parser, 'analyze_test_results'), "Missing analyze_test_results"
 
-    print("✅ Pro-os/parser_util 导入成功")
-    print(f"   - 公共函数: str2bool, get_test_directives, etc.")
-    print(f"   - 专用函数: analyze_test_results")
+    print("✅ Pro-os/parser_util imported successfully")
+    print(f"   - Shared functions: str2bool, get_test_directives, etc.")
+    print(f"   - Dedicated functions: analyze_test_results")
 
 except Exception as e:
-    print(f"❌ Pro-os/parser_util 导入失败: {e}")
+    print(f"❌ Pro-os/parser_util import failed: {e}")
     import traceback
     traceback.print_exc()
     sys.exit(1)
 
 # ========== Test 4: Functional tests ==========
-print("\n[测试 4] 功能测试")
+print("\n[Test 4] Functional tests")
 try:
     # Test str2bool
     assert util_parser.str2bool("true") == True
     assert util_parser.str2bool("false") == False
-    print("✅ str2bool 功能正常")
+    print("✅ str2bool works correctly")
 
     # Test get_apply_files
     test_patch = """diff --git a/foo.py b/foo.py
 diff --git a/bar.js b/bar.js"""
     files = util_parser.get_apply_files(test_patch)
-    assert files == ["foo.py", "bar.js"], f"期望 ['foo.py', 'bar.js'], 实际 {files}"
-    print("✅ get_apply_files 功能正常")
+    assert files == ["foo.py", "bar.js"], f"Expected ['foo.py', 'bar.js'], got {files}"
+    print("✅ get_apply_files works correctly")
 
     # Test mini-swe-agent-specific functions
     line = "+def test_function():"
     result = mini_parser.is_strict_def_or_class(line)
-    assert result == ("func", "test_function"), f"期望 ('func', 'test_function'), 实际 {result}"
-    print("✅ is_strict_def_or_class 功能正常")
+    assert result == ("func", "test_function"), f"Expected ('func', 'test_function'), got {result}"
+    print("✅ is_strict_def_or_class works correctly")
 
     # Test Pro-os-specific functions
     output = {
@@ -117,25 +117,25 @@ diff --git a/bar.js b/bar.js"""
         ]
     }
     failed, status_map = pro_parser.analyze_test_results(output)
-    assert failed == ["test2"], f"期望 ['test2'], 实际 {failed}"
+    assert failed == ["test2"], f"Expected ['test2'], got {failed}"
     assert status_map == {"test1": "PASSED", "test2": "FAILED"}
-    print("✅ analyze_test_results 功能正常")
+    print("✅ analyze_test_results works correctly")
 
 except Exception as e:
-    print(f"❌ 功能测试失败: {e}")
+    print(f"❌ Functional tests failed: {e}")
     import traceback
     traceback.print_exc()
     sys.exit(1)
 
 # ========== Summary ==========
 print("\n" + "=" * 60)
-print("🎉 所有测试通过！parser_utils 重构成功！")
+print("🎉 All tests passed! parser_utils refactoring successful!")
 print("=" * 60)
-print("\n重构收益：")
-print("  - 减少重复代码 ~250 行")
-print("  - util/parser_utils.py: 公共函数统一维护")
-print("  - mini-swe-agent: 保留 Python 专用函数")
-print("  - Pro-os: 保留测试分析专用函数")
-print("\n下一步：")
-print("  - 运行实际的脚本验证（如 swebench_test.py）")
-print("  - 提交代码到 git")
+print("\nRefactoring benefits:")
+print("  - Reduced duplicate code by ~250 lines")
+print("  - util/parser_utils.py: shared functions maintained in one place")
+print("  - mini-swe-agent: retains Python-specific functions")
+print("  - Pro-os: retains test analysis specific functions")
+print("\nNext steps:")
+print("  - Run actual scripts for verification (e.g. swebench_test.py)")
+print("  - Commit code to git")

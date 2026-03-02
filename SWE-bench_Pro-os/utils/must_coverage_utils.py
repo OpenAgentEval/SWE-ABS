@@ -406,7 +406,7 @@ def compute_must_coverage(container, patch, save_dir, logger, patch_log):
 # ---------- example usage ----------
 if __name__ == "__main__":
 
-    log_file = Path("/home/ddq/CaoYang/SWE-PLUS/SWE-bench_Pro-os/logs/aug_test_center/eval_gold_patch/debug_go1/instance_gravitational__teleport-eefac60a350930e5f295f94a2d55b94c1988c04e-vee9b09fb20c43af7e520f57e9239bbcf46b7113d/raw_container.log")
+    log_file = Path("SWE-ABS/SWE-bench_Pro-os/logs/aug_test_center/eval_gold_patch/debug_go1/instance_gravitational__teleport-eefac60a350930e5f295f94a2d55b94c1988c04e-vee9b09fb20c43af7e520f57e9239bbcf46b7113d/raw_container.log")
     offset_dict = parse_patch_log(log_file.read_text())
     
     

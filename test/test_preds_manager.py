@@ -15,36 +15,36 @@ import tempfile
 from pathlib import Path
 
 print("=" * 60)
-print("测试 preds_manager 重构")
+print("Testing preds_manager refactoring")
 print("=" * 60)
 
 # ========== Test 1: Direct import of util/preds_manager ==========
-print("\n[测试 1] 直接导入 util/preds_manager")
+print("\n[Test 1] Direct import of util/preds_manager")
 try:
     sys.path.insert(0, str(Path(__file__).parent.parent / "util"))
     from sweabs_utils.preds_manager import ResultManager
 
     # Test basic methods
-    assert hasattr(ResultManager, 'load'), "缺少 load 方法"
-    assert hasattr(ResultManager, 'save'), "缺少 save 方法"
-    assert hasattr(ResultManager, 'update_instance'), "缺少 update_instance 方法"
-    assert hasattr(ResultManager, 'update_instance_nested'), "缺少 update_instance_nested 方法"
-    assert hasattr(ResultManager, 'get_instance'), "缺少 get_instance 方法"
-    assert hasattr(ResultManager, 'get_failed_test_gen'), "缺少 get_failed_test_gen 方法"
-    assert hasattr(ResultManager, 'get_gold_patch_failures'), "缺少 get_gold_patch_failures 方法"
-    assert hasattr(ResultManager, 'get_low_coverage_instances'), "缺少 get_low_coverage_instances 方法"
+    assert hasattr(ResultManager, 'load'), "Missing load method"
+    assert hasattr(ResultManager, 'save'), "Missing save method"
+    assert hasattr(ResultManager, 'update_instance'), "Missing update_instance method"
+    assert hasattr(ResultManager, 'update_instance_nested'), "Missing update_instance_nested method"
+    assert hasattr(ResultManager, 'get_instance'), "Missing get_instance method"
+    assert hasattr(ResultManager, 'get_failed_test_gen'), "Missing get_failed_test_gen method"
+    assert hasattr(ResultManager, 'get_gold_patch_failures'), "Missing get_gold_patch_failures method"
+    assert hasattr(ResultManager, 'get_low_coverage_instances'), "Missing get_low_coverage_instances method"
 
-    print("✅ util/preds_manager.py 导入成功")
-    print(f"   - 包含方法: load, save, update_instance, etc.")
+    print("✅ util/preds_manager.py imported successfully")
+    print(f"   - Contains methods: load, save, update_instance, etc.")
 
 except Exception as e:
-    print(f"❌ util/preds_manager.py 导入失败: {e}")
+    print(f"❌ util/preds_manager.py import failed: {e}")
     import traceback
     traceback.print_exc()
     sys.exit(1)
 
 # ========== Test 2: ResultManager basic functionality ==========
-print("\n[测试 2] ResultManager 基本功能")
+print("\n[Test 2] ResultManager basic functionality")
 try:
     with tempfile.TemporaryDirectory() as tmpdir:
         preds_path = Path(tmpdir) / "test_preds.json"
@@ -67,36 +67,36 @@ try:
         })
 
         # Verify data has been saved
-        assert preds_path.exists(), "preds.json 文件未创建"
+        assert preds_path.exists(), "preds.json file not created"
 
         with open(preds_path, 'r') as f:
             data = json.load(f)
-        assert "test-instance-1" in data, "实例未保存"
+        assert "test-instance-1" in data, "Instance not saved"
         assert data["test-instance-1"]["model_test_patch"] == "diff --git a/test.py b/test.py"
 
-        print("✅ update_instance 功能正常")
+        print("✅ update_instance works correctly")
 
         # Test 2: Retrieve instance
         instance = manager.get_instance("test-instance-1")
-        assert instance is not None, "无法获取实例"
+        assert instance is not None, "Failed to get instance"
         assert instance["meta"]["coverage_rate"] == 0.95
 
-        print("✅ get_instance 功能正常")
+        print("✅ get_instance works correctly")
 
         # Test 3: Check if instance exists
         assert manager.instance_exists("test-instance-1") == True
         assert manager.instance_exists("non-existent") == False
 
-        print("✅ instance_exists 功能正常")
+        print("✅ instance_exists works correctly")
 
 except Exception as e:
-    print(f"❌ ResultManager 基本功能测试失败: {e}")
+    print(f"❌ ResultManager basic functionality test failed: {e}")
     import traceback
     traceback.print_exc()
     sys.exit(1)
 
 # ========== Test 3: Nested key update functionality ==========
-print("\n[测试 3] 嵌套键更新功能")
+print("\n[Test 3] Nested key update functionality")
 try:
     with tempfile.TemporaryDirectory() as tmpdir:
         preds_path = Path(tmpdir) / "test_preds.json"
@@ -128,22 +128,22 @@ try:
 
         # Verify the update
         instance = manager.get_instance("test-instance-2")
-        assert instance["meta"]["pass_gold_patch_status"] == "success", "嵌套键更新失败"
-        assert instance["meta"]["coverage_rate"] == 0.85, "嵌套键更新失败"
-        assert instance["stage"][-1]["evaluation_info"]["status"] == "completed", "数组索引更新失败"
+        assert instance["meta"]["pass_gold_patch_status"] == "success", "Nested key update failed"
+        assert instance["meta"]["coverage_rate"] == 0.85, "Nested key update failed"
+        assert instance["stage"][-1]["evaluation_info"]["status"] == "completed", "Array index update failed"
 
-        print("✅ update_instance_nested 功能正常")
-        print(f"   - 支持点号分隔的嵌套键: meta.pass_gold_patch_status")
-        print(f"   - 支持数组负索引: stage.-1.evaluation_info")
+        print("✅ update_instance_nested works correctly")
+        print(f"   - Supports dot-separated nested keys: meta.pass_gold_patch_status")
+        print(f"   - Supports negative array index: stage.-1.evaluation_info")
 
 except Exception as e:
-    print(f"❌ 嵌套键更新功能测试失败: {e}")
+    print(f"❌ Nested key update functionality test failed: {e}")
     import traceback
     traceback.print_exc()
     sys.exit(1)
 
 # ========== Test 4: Query functionality ==========
-print("\n[测试 4] 查询功能")
+print("\n[Test 4] Query functionality")
 try:
     with tempfile.TemporaryDirectory() as tmpdir:
         preds_path = Path(tmpdir) / "test_preds.json"
@@ -188,50 +188,50 @@ try:
 
         # Test query
         failed_test_gen = manager.get_failed_test_gen()
-        assert "fail-test-gen-1" in failed_test_gen, "未检测到测试生成失败的实例"
+        assert "fail-test-gen-1" in failed_test_gen, "Failed test generation instance not detected"
 
         gold_failures = manager.get_gold_patch_failures()
-        assert "fail-gold-patch-1" in gold_failures, "未检测到 gold patch 失败的实例"
-        assert "fail-test-gen-1" in gold_failures, "空 meta 的实例应该算 gold patch 失败"
+        assert "fail-gold-patch-1" in gold_failures, "Gold patch failure instance not detected"
+        assert "fail-test-gen-1" in gold_failures, "Instance with empty meta should count as gold patch failure"
 
         low_coverage = manager.get_low_coverage_instances()
-        assert "low-coverage-1" in low_coverage, "未检测到低覆盖率实例"
-        assert "success-full-coverage" not in low_coverage, "完美覆盖率实例不应出现在低覆盖率列表"
+        assert "low-coverage-1" in low_coverage, "Low coverage instance not detected"
+        assert "success-full-coverage" not in low_coverage, "Perfect coverage instance should not appear in low coverage list"
 
-        print("✅ get_failed_test_gen 功能正常")
-        print("✅ get_gold_patch_failures 功能正常")
-        print("✅ get_low_coverage_instances 功能正常")
+        print("✅ get_failed_test_gen works correctly")
+        print("✅ get_gold_patch_failures works correctly")
+        print("✅ get_low_coverage_instances works correctly")
 
         # Test statistics functionality
         stats = manager.get_statistics()
-        assert stats["total_instances"] == 4, "总实例数统计错误"
-        assert stats["successful_instances"] == 2, "成功实例数统计错误"
+        assert stats["total_instances"] == 4, "Total instance count is incorrect"
+        assert stats["successful_instances"] == 2, "Successful instance count is incorrect"
 
-        print("✅ get_statistics 功能正常")
-        print(f"   - 总实例数: {stats['total_instances']}")
-        print(f"   - 成功实例数: {stats['successful_instances']}")
+        print("✅ get_statistics works correctly")
+        print(f"   - Total instances: {stats['total_instances']}")
+        print(f"   - Successful instances: {stats['successful_instances']}")
 
 except Exception as e:
-    print(f"❌ 查询功能测试失败: {e}")
+    print(f"❌ Query functionality test failed: {e}")
     import traceback
     traceback.print_exc()
     sys.exit(1)
 
 # ========== Summary ==========
 print("\n" + "=" * 60)
-print("🎉 所有测试通过！preds_manager 重构成功！")
+print("🎉 All tests passed! preds_manager refactoring successful!")
 print("=" * 60)
-print("\n重构收益：")
-print("  - 统一的 preds.json 管理接口")
-print("  - 线程安全的文件操作")
-print("  - 支持嵌套键更新（meta.pass_gold_patch_status）")
-print("  - 支持数组索引（stage.-1.evaluation_info）")
-print("  - 便捷的查询方法（失败实例、低覆盖率等）")
-print("\n已重构的文件：")
-print("  - util/preds_manager.py: 公共管理类")
-print("  - mini-swe-agent: 6 个脚本")
-print("  - swe-bench: 2 个脚本")
-print("  - SWE-bench_Pro-os: 3 个脚本")
-print("\n下一步：")
-print("  - 运行实际的脚本验证")
-print("  - 提交代码到 git")
+print("\nRefactoring benefits:")
+print("  - Unified preds.json management interface")
+print("  - Thread-safe file operations")
+print("  - Supports nested key updates (meta.pass_gold_patch_status)")
+print("  - Supports array indexing (stage.-1.evaluation_info)")
+print("  - Convenient query methods (failed instances, low coverage, etc.)")
+print("\nRefactored files:")
+print("  - util/preds_manager.py: shared manager class")
+print("  - mini-swe-agent: 6 scripts")
+print("  - swe-bench: 2 scripts")
+print("  - SWE-bench_Pro-os: 3 scripts")
+print("\nNext steps:")
+print("  - Run actual scripts for verification")
+print("  - Commit code to git")
