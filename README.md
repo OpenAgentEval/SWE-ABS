@@ -11,9 +11,6 @@
 
 ---
 
-
----
-
 ### HuggingFace Re-evaluation with SWE-ABS Data
 
 The SWE-ABS test patches are published on HuggingFace. You can use them to re-evaluate any coding agent without running the full SWE-ABS pipeline locally.
@@ -47,7 +44,7 @@ python -m swebench.runtest.run_evaluation_test \
     --max_workers 12 \
     --timeout 120
 ```
-
+---
 
 ## Overview
 
