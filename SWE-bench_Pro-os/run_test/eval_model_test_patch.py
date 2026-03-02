@@ -31,7 +31,7 @@ from sweabs_utils.preds_manager import ResultManager
 from helper_code.image_uri import get_dockerhub_image_uri
 from utils.constants import (
     RUN_EVALUATION_LOG_DIR,
-    RUN_SWE_PLIS_DIR,
+    RUN_SWE_ABS_DIR,
     SUCCESS_STATUS,
     FAIL_STATUS
 )
@@ -721,9 +721,9 @@ def main(args):
     run_id = args.run_id
 
     global global_logger
-    global_log_file = Path(RUN_SWE_PLIS_DIR) / SAVE_DIR / run_id / "global.log"
+    global_log_file = Path(RUN_SWE_ABS_DIR) / SAVE_DIR / run_id / "global.log"
     global_logger = setup_global_logger(global_log_file, add_stdout=True)
-    final_results_save_file = Path(RUN_SWE_PLIS_DIR) / SAVE_DIR / run_id / "final_results.json"
+    final_results_save_file = Path(RUN_SWE_ABS_DIR) / SAVE_DIR / run_id / "final_results.json"
     
     # Load input data
     with open(args.input_path, "r") as f:

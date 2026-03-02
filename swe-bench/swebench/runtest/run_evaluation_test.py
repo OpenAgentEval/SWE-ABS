@@ -33,7 +33,7 @@ from swebench.harness.constants import (
     LOG_INSTANCE,
     LOG_TEST_OUTPUT,
     RUN_EVALUATION_LOG_DIR,
-    RUN_SWE_PLIS_DIR,
+    RUN_SWE_ABS_DIR,
     SUCCESS_STATUS,
     FAIL_STATUS,
     START_TEST_OUTPUT,
@@ -333,7 +333,7 @@ def run_instances(
     updataed_results = {}
     lock = threading.Lock()
 
-    save_path = Path(RUN_SWE_PLIS_DIR) / SAVE_DIR / run_id / "final_results.json"
+    save_path = Path(RUN_SWE_ABS_DIR) / SAVE_DIR / run_id / "final_results.json"
     save_path.parent.mkdir(parents=True, exist_ok=True)
 
     if save_path.exists():
@@ -509,9 +509,9 @@ def main(
     elif vaild_model_path:
         SAVE_DIR = "eval_agent"
 
-    global_log_file = Path(RUN_SWE_PLIS_DIR) / SAVE_DIR / run_id / "global.log"
+    global_log_file = Path(RUN_SWE_ABS_DIR) / SAVE_DIR / run_id / "global.log"
     global_logger = setup_global_logger(global_log_file)
-    final_results_save_file = Path(RUN_SWE_PLIS_DIR) / SAVE_DIR / run_id / "final_results.json"
+    final_results_save_file = Path(RUN_SWE_ABS_DIR) / SAVE_DIR / run_id / "final_results.json"
     
     """
     evaluate model gen test
@@ -800,16 +800,6 @@ if __name__ == "__main__":
         formatter_class=ArgumentDefaultsHelpFormatter,
     )
     # Common args
-    parser.add_argument(
-        "-d",
-        "--dataset_name",
-        default="SWE-bench/SWE-bench_Lite",
-        type=str,
-        help="Name of dataset or path to JSON file.",
-    )
-    parser.add_argument(
-        "-s", "--split", type=str, default="test", help="Split of the dataset"
-    )
     parser.add_argument(
         "-i",
         "--instance_ids",

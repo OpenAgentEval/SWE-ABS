@@ -30,7 +30,7 @@ from swebench.harness.constants import (
     LOG_INSTANCE,
     LOG_TEST_OUTPUT,
     RUN_EVALUATION_LOG_DIR,
-    RUN_SWE_PLIS_DIR,
+    RUN_SWE_ABS_DIR,
     UTF8,
 )
 from swebench.harness.docker_utils import (
@@ -274,7 +274,7 @@ def run_instances(
     pbar = tqdm(total=len(payloads), desc="Evaluation", postfix=stats)
     lock = threading.Lock()
     results_dict = {}
-    save_path = Path(RUN_SWE_PLIS_DIR) / "modified_raleted_lines" / "final_results.json"
+    save_path = Path(RUN_SWE_ABS_DIR) / "modified_raleted_lines" / "final_results.json"
     save_path.parent.mkdir(exist_ok=True, parents=True)
     if save_path.exists():
         results_dict = json.load(save_path.open())
