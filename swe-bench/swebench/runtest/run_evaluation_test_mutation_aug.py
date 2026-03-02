@@ -30,7 +30,7 @@ from swebench.harness.constants import (
     LOG_INSTANCE,
     LOG_TEST_OUTPUT,
     RUN_EVALUATION_LOG_DIR,
-    RUN_SWE_PLIS_DIR,
+    RUN_SWE_ABS_DIR,
     SUCCESS_STATUS,
     FAIL_STATUS,
     START_TEST_OUTPUT,
@@ -286,7 +286,7 @@ def run_instances(
 
     run_threadpool(run_evaluation_with_progress, payloads, max_workers)
 
-    save_path = Path(RUN_SWE_PLIS_DIR) / SAVE_DIR / run_id / "final_results.json"
+    save_path = Path(RUN_SWE_ABS_DIR) / SAVE_DIR / run_id / "final_results.json"
     save_path.parent.mkdir(parents=True, exist_ok=True)
 
     final_results_manager = ResultManager(save_path)
@@ -342,7 +342,7 @@ def main(
     args = argparse.Namespace(**kwargs)
 
     global global_logger
-    global_log_file = Path(RUN_SWE_PLIS_DIR) / SAVE_DIR / run_id / "global.log"
+    global_log_file = Path(RUN_SWE_ABS_DIR) / SAVE_DIR / run_id / "global.log"
     global_logger = setup_global_logger(global_log_file)
     """
 
@@ -391,7 +391,7 @@ def main(
         return
 
 
-    save_file = Path(RUN_SWE_PLIS_DIR) / SAVE_DIR / run_id / "final_results.json"
+    save_file = Path(RUN_SWE_ABS_DIR) / SAVE_DIR / run_id / "final_results.json"
     if os.path.exists(save_file) and re_run_eval == False:
         save_file_manager = ResultManager(save_file)
         results_dict = save_file_manager.load()

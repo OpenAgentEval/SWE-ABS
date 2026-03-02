@@ -51,13 +51,13 @@ from tqdm import tqdm
 from helper_code.image_uri import get_dockerhub_image_uri
 from utils.constants import (
     RUN_EVALUATION_LOG_DIR,
-    RUN_SWE_PLIS_DIR,
+    RUN_SWE_ABS_DIR,
 )
 from utils.logging_utils import setup_global_logger
 from utils.parser_util import str2bool
 from utils.must_coverage_utils import compute_must_coverage
 
-RUN_SWE_PLIS_DIR=Path("swe_plus_res/")
+RUN_SWE_ABS_DIR=Path("swe_plus_res/")
 RUN_EVALUATION_LOG_DIR=Path("logs/")
 
 global_logger = None
@@ -353,10 +353,10 @@ def main(args):
     run_id = args.run_id
 
     global global_logger
-    global_log_file = Path(RUN_SWE_PLIS_DIR) / "extract_line_numbers" / run_id / "global.log"
+    global_log_file = Path(RUN_SWE_ABS_DIR) / "extract_line_numbers" / run_id / "global.log"
     global_log_file.parent.mkdir(parents=True, exist_ok=True)
     global_logger = setup_global_logger(global_log_file, add_stdout=True)
-    final_results_save_file = Path(RUN_SWE_PLIS_DIR) / "extract_line_numbers" / run_id / "final_results.json"
+    final_results_save_file = Path(RUN_SWE_ABS_DIR) / "extract_line_numbers" / run_id / "final_results.json"
 
     # Load input data
     samples = load_input_data(args.input_path)

@@ -180,7 +180,7 @@ mini-swe-agent/chat_history
 **/exit_statuses/
 swe-bench/Temp/
 mini-swe-agent/tool_script/chat_history.txt
-
+**/swe_abs_res/
 # Pyre type checker
 
 .pyre/

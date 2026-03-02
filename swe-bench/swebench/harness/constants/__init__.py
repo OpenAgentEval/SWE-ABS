@@ -19,7 +19,7 @@ INSTANCE_IMAGE_BUILD_DIR = Path("logs/build_images/instances")
 RUN_EVALUATION_LOG_DIR = Path("logs/aug_test_center")
 RUN_MUTATION_LOG_DIR = Path("logs/mutation_center")
 RUN_VALIDATION_LOG_DIR = Path("logs/run_validation")
-RUN_SWE_PLIS_DIR = Path("swe_plus_res/")
+RUN_SWE_ABS_DIR = Path("swe_abs_res/")
 
 
 

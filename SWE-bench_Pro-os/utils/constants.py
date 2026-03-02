@@ -2,7 +2,7 @@ from pathlib import Path
 
 
 RUN_EVALUATION_LOG_DIR = Path("logs/aug_test_center")
-RUN_SWE_PLIS_DIR = Path("swe_plus_res/")
+RUN_SWE_ABS_DIR = Path("swe_plus_res/")
 
 # Docker constants
 DOCKER_USER = "root"

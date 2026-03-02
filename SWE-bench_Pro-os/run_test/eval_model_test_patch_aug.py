@@ -21,7 +21,7 @@ from sweabs_utils.preds_manager import ResultManager
 
 from utils.constants import (
     RUN_EVALUATION_LOG_DIR,
-    RUN_SWE_PLIS_DIR,
+    RUN_SWE_ABS_DIR,
     SUCCESS_STATUS,
     FAIL_STATUS
 )
@@ -507,7 +507,7 @@ def analyze_and_save_results(args, results_dict, predictions_test):
 
 def _setup_paths(run_id):
     """Setup logging and result file paths."""
-    base_dir = Path(RUN_SWE_PLIS_DIR) / SAVE_DIR / run_id
+    base_dir = Path(RUN_SWE_ABS_DIR) / SAVE_DIR / run_id
     return {
         "log_file": base_dir / "global.log",
         "results_file": base_dir / "final_results.json",
