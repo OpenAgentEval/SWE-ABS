@@ -83,7 +83,7 @@ SWE-bench Instances
 
 ![Motivating Example](data/image/motivation.png)
 
-A real Django instance (`django__django-10973`) illustrates why strong tests matter. The issue requires the PostgreSQL backend to call `subprocess.run` for password retrieval — a function that requires a string argument. The original test suite only validates string passwords, creating a semantic blind spot: 25 patches that omit the `str()` conversion pass the original tests because they are never exercised with non-string inputs. SWE-ABS generates an augmented test that passes non-string inputs, exposing the missing conversion and causing all 25 incorrect patches to fail.
+A real Django instance (`django__django-10973`) illustrates why strong tests matter. The issue requires the PostgreSQL backend to call `subprocess.run` for password retrieval — **a function that requires a string argument**. The original test suite only validates string passwords, creating a semantic blind spot: 25 patches that omit the `str()` conversion pass the original tests because they are never exercised with non-string inputs. SWE-ABS generates an augmented test that passes non-string inputs, exposing the missing conversion and causing all 25 incorrect patches to fail.
 
 ---
 
