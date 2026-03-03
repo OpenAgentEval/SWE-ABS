@@ -5,7 +5,7 @@
 [![Dataset](https://img.shields.io/badge/🤗_SWE--bench__Pro--ABS-HuggingFace-yellow?style=for-the-badge)](https://huggingface.co/datasets/OpenAgentLab/SWE-bench_Pro-ABS)
 [![Paper](https://img.shields.io/badge/📄_Paper-arXiv-red?style=for-the-badge)](https://arxiv.org/abs/your-paper-id)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
-[![Discord](https://img.shields.io/badge/Discord-Join-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/Cznaz5gE)
+[![Discord](https://img.shields.io/badge/Discord-Join-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/r3wDPRPaS4)
 
 **SWE-ABS** is an automated framework for constructing high-quality software engineering benchmarks. It generates test patches, produces mutation patches to challenge those tests, and validates them with augmented tests — providing a scalable pipeline for evaluating the abstract correctness of code fixes.
 
@@ -228,7 +228,6 @@ python run_stage_mutation_aug.py \
 **Output**: `result/mutation_aug/{run-id}/preds_*_eval.json`
 
 See [Mutation Augmentation Guide (EN)](docs/mutation_aug_guide_en.md) · [中文](docs/mutation_aug_guide_zh.md)
-
 
 
 ---
