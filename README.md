@@ -1,4 +1,8 @@
-# SWE-ABS
+<p align="center">
+  <img src="data/image/icon.png" alt="SWE-ABS Icon" width="200"/>
+  <br/>
+  <h1 align="center">SWE-ABS</h1>
+</p>
 
 [![Leaderboard](https://img.shields.io/badge/🏆_Leaderboard-Live-blue?style=for-the-badge)](https://openagenteval.github.io/SWE-ABS/)
 [![Dataset](https://img.shields.io/badge/🤗_SWE--Bench__Verified__ABS-HuggingFace-yellow?style=for-the-badge)](https://huggingface.co/datasets/OpenAgentLab/SWE-Bench_Verified_ABS)
