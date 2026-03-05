@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SWE-ABS Benchmark Results - SWE-Bench Verified</title>
+    <title>SWE-ABS Benchmark Results - Enhanced</title>
     <style>
         * {
             margin: 0;
@@ -222,6 +222,20 @@
             color: #212529;
         }
 
+        .badge-new {
+            display: inline-block;
+            background: #28a745;
+            color: white;
+            font-size: 0.65em;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 6px;
+            vertical-align: middle;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
         .percentage {
             font-weight: 600;
             font-variant-numeric: tabular-nums;
@@ -386,7 +400,7 @@
     <div class="container">
         <header>
             <h1>SWE-ABS Benchmark Results</h1>
-            <div class="subtitle">Performance comparison of top 30 agent systems on <strong>SWE-Bench Verified</strong> vs SWE-ABS</div>
+            <div class="subtitle">Performance comparison of top 30 agent systems on SWE-Bench vs SWE-ABS</div>
         </header>
 
         <div class="stats-section" id="statsSection">
@@ -395,7 +409,7 @@
                 <div class="value" id="totalModels">0</div>
             </div>
             <div class="stat-card">
-                <h3>Avg. SWE-Bench Verified</h3>
+                <h3>Avg. Original</h3>
                 <div class="value" id="avgOriginal">0<span class="unit">%</span></div>
             </div>
             <div class="stat-card">
@@ -434,8 +448,8 @@
                     <tr>
                         <th class="sortable" data-column="date">Date</th>
                         <th class="sortable" data-column="model">Model</th>
-                        <th class="sortable" data-column="orig">SWE-Bench Verified (%)</th>
-                        <th class="sortable" data-column="swe-abs-verified">SWE-ABS-Verified (%)</th>
+                        <th class="sortable" data-column="orig">Orig. (%)</th>
+                        <th class="sortable" data-column="swe-abs">SWE-ABS (%)</th>
                         <th class="sortable" data-column="drop">Drop (%)</th>
                         <th class="sortable" data-column="old-rank">Old Rank</th>
                         <th class="sortable" data-column="new-rank">New Rank</th>
@@ -456,7 +470,7 @@
         </div>
 
         <footer>
-            <p>Data generated from SWE-Bench Verified evaluation results | Last updated: <span id="lastUpdated">-</span></p>
+            <p>Data generated from SWE-Bench evaluation results | Last updated: <span id="lastUpdated">-</span></p>
         </footer>
     </div>
 
@@ -467,6 +481,7 @@
         let filteredData = [];
         let currentFilter = 'all';
 
+        // 加载JSON数据
         async function loadData() {
             try {
                 const response = await fetch('swe_abs_data.json');
@@ -545,7 +560,7 @@
 
                 tr.innerHTML = `
                     <td class="date">${row.date}</td>
-                    <td class="model-name">${row.model}</td>
+                    <td class="model-name">${row.model}${row.isNew ? '<span class="badge-new">new</span>' : ''}</td>
                     <td class="percentage orig-pct">${row.orig.toFixed(2)}%</td>
                     <td class="percentage swe-abs-pct">${row.sweAbs.toFixed(2)}%</td>
                     <td class="percentage drop-pct">${row.drop.toFixed(2)}%</td>
@@ -651,11 +666,11 @@
             const searchTerm = document.getElementById('searchInput').value.toLowerCase();
 
             filteredData = data.filter(row => {
-
+                // 先应用搜索过滤
                 const matchesSearch = row.model.toLowerCase().includes(searchTerm) || row.date.includes(searchTerm);
                 if (!matchesSearch) return false;
 
-
+                // 再应用分类过滤
                 const rankChange = row.oldRank - row.newRank;
                 switch (filterType) {
                     case 'rank-up':
@@ -691,6 +706,7 @@
             });
         });
 
+        // 页面加载时加载数据
         window.addEventListener('DOMContentLoaded', loadData);
     </script>
 </body>

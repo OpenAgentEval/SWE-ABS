@@ -2,20 +2,47 @@
   "metadata": {
     "totalModels": 30,
     "totalInstances": 500,
-    "generatedAt": "2026-02-28T04:16:56.509968"
+    "generatedAt": "2026-03-05T08:46:33.521636"
   },
   "data": [
+    {
+      "date": "20251205",
+      "model": "Sonar Foundation Agent + Claude 4.5 Opus",
+      "orig": 79.4,
+      "sweAbs": 70.8,
+      "drop": 8.6,
+      "oldRank": 1,
+      "newRank": 1,
+      "modelKey": "20251205_sonar-foundation-agent_claude-opus-4-5",
+      "oldCount": 397,
+      "newCount": 354,
+      "isNew": true
+    },
+    {
+      "date": "20251215",
+      "model": "live-SWE-agent + Claude 4.5 Opus medium (20251101)",
+      "orig": 79.2,
+      "sweAbs": 67.8,
+      "drop": 11.4,
+      "oldRank": 2,
+      "newRank": 2,
+      "modelKey": "20251215_livesweagent_claude-opus-4-5",
+      "oldCount": 396,
+      "newCount": 339,
+      "isNew": true
+    },
     {
       "date": "20250928",
       "model": "TRAE + Doubao-Seed-Code",
       "orig": 78.8,
       "sweAbs": 62.2,
       "drop": 16.6,
-      "oldRank": 1,
-      "newRank": 5,
+      "oldRank": 3,
+      "newRank": 11,
       "modelKey": "20250928_trae_doubao_seed_code",
       "oldCount": 394,
-      "newCount": 311
+      "newCount": 311,
+      "isNew": false
     },
     {
       "date": "20251120",
@@ -23,23 +50,25 @@
       "orig": 77.4,
       "sweAbs": 65.4,
       "drop": 12.0,
-      "oldRank": 2,
-      "newRank": 1,
+      "oldRank": 4,
+      "newRank": 5,
       "modelKey": "20251120_livesweagent_gemini-3-pro-preview",
       "oldCount": 387,
-      "newCount": 327
+      "newCount": 327,
+      "isNew": false
     },
     {
-      "date": "20250902",
-      "model": "Atlassian Rovo Dev (2025-09-02)",
+      "date": "20260217",
+      "model": "mini-SWE-agent + Claude 4.5 Opus (high reasoning)",
       "orig": 76.8,
-      "sweAbs": 61.2,
-      "drop": 15.6,
-      "oldRank": 3,
-      "newRank": 8,
-      "modelKey": "20250902_atlassian-rovo-dev",
+      "sweAbs": 66.4,
+      "drop": 10.4,
+      "oldRank": 5,
+      "newRank": 3,
+      "modelKey": "20260217_mini-v2.0.0_claude-4-5-opus-high",
       "oldCount": 384,
-      "newCount": 306
+      "newCount": 332,
+      "isNew": true
     },
     {
       "date": "20250804",
@@ -47,11 +76,25 @@
       "orig": 76.8,
       "sweAbs": 63.8,
       "drop": 13.0,
-      "oldRank": 4,
-      "newRank": 3,
+      "oldRank": 6,
+      "newRank": 8,
       "modelKey": "20250804_epam-ai-run-claude-4-sonnet",
       "oldCount": 384,
-      "newCount": 319
+      "newCount": 319,
+      "isNew": false
+    },
+    {
+      "date": "20250902",
+      "model": "Atlassian Rovo Dev (2025-09-02)",
+      "orig": 76.8,
+      "sweAbs": 61.2,
+      "drop": 15.6,
+      "oldRank": 7,
+      "newRank": 16,
+      "modelKey": "20250902_atlassian-rovo-dev",
+      "oldCount": 384,
+      "newCount": 306,
+      "isNew": false
     },
     {
       "date": "20250819",
@@ -59,11 +102,51 @@
       "orig": 76.4,
       "sweAbs": 61.8,
       "drop": 14.6,
-      "oldRank": 5,
-      "newRank": 6,
+      "oldRank": 8,
+      "newRank": 12,
       "modelKey": "20250819_ACoder",
       "oldCount": 382,
-      "newCount": 309
+      "newCount": 309,
+      "isNew": false
+    },
+    {
+      "date": "20260217",
+      "model": "mini-SWE-agent + Gemini 3 Flash (high reasoning)",
+      "orig": 75.8,
+      "sweAbs": 63.4,
+      "drop": 12.4,
+      "oldRank": 9,
+      "newRank": 9,
+      "modelKey": "20260217_mini-v2.0.0_gemini-3-flash-high",
+      "oldCount": 379,
+      "newCount": 317,
+      "isNew": true
+    },
+    {
+      "date": "20260217",
+      "model": "mini-SWE-agent + MiniMax M2.5 (high reasoning)",
+      "orig": 75.8,
+      "sweAbs": 64.2,
+      "drop": 11.6,
+      "oldRank": 10,
+      "newRank": 6,
+      "modelKey": "20260217_mini-v2.0.0_minimax-2-5-high",
+      "oldCount": 379,
+      "newCount": 321,
+      "isNew": true
+    },
+    {
+      "date": "20260217",
+      "model": "mini-SWE-agent + Claude Opus 4.6",
+      "orig": 75.6,
+      "sweAbs": 65.6,
+      "drop": 10.0,
+      "oldRank": 11,
+      "newRank": 4,
+      "modelKey": "20260217_mini-v2.0.0_claude-4-6-opus",
+      "oldCount": 378,
+      "newCount": 328,
+      "isNew": true
     },
     {
       "date": "20250901",
@@ -71,23 +154,25 @@
       "orig": 75.6,
       "sweAbs": 62.4,
       "drop": 13.2,
-      "oldRank": 6,
-      "newRank": 4,
+      "oldRank": 12,
+      "newRank": 10,
       "modelKey": "20250901_warp",
       "oldCount": 378,
-      "newCount": 312
+      "newCount": 312,
+      "isNew": false
     },
     {
       "date": "20250612",
-      "model": "TRAE",
+      "model": "TRAE + Claude Sonnet 4 + Opus 4 + Sonnet 3.7 + Gemini 2.5 Pro",
       "orig": 75.2,
       "sweAbs": 58.0,
       "drop": 17.2,
-      "oldRank": 7,
-      "newRank": 18,
+      "oldRank": 13,
+      "newRank": 28,
       "modelKey": "20250612_trae",
       "oldCount": 376,
-      "newCount": 290
+      "newCount": 290,
+      "isNew": false
     },
     {
       "date": "20251103",
@@ -95,11 +180,12 @@
       "orig": 75.0,
       "sweAbs": 64.2,
       "drop": 10.8,
-      "oldRank": 8,
-      "newRank": 2,
+      "oldRank": 14,
+      "newRank": 7,
       "modelKey": "20251103_sonar-foundation-agent_claude-sonnet-4-5",
       "oldCount": 375,
-      "newCount": 321
+      "newCount": 321,
+      "isNew": false
     },
     {
       "date": "20250731",
@@ -107,23 +193,12 @@
       "orig": 74.8,
       "sweAbs": 60.4,
       "drop": 14.4,
-      "oldRank": 9,
-      "newRank": 13,
+      "oldRank": 15,
+      "newRank": 21,
       "modelKey": "20250731_harness_ai",
       "oldCount": 374,
-      "newCount": 302
-    },
-    {
-      "date": "20250915",
-      "model": "JoyCode",
-      "orig": 74.6,
-      "sweAbs": 61.2,
-      "drop": 13.4,
-      "oldRank": 10,
-      "newRank": 9,
-      "modelKey": "20250915_JoyCode",
-      "oldCount": 373,
-      "newCount": 306
+      "newCount": 302,
+      "isNew": false
     },
     {
       "date": "20250720",
@@ -131,23 +206,38 @@
       "orig": 74.6,
       "sweAbs": 60.6,
       "drop": 14.0,
-      "oldRank": 11,
-      "newRank": 12,
+      "oldRank": 16,
+      "newRank": 20,
       "modelKey": "20250720_Lingxi-v1.5_claude-4-sonnet-20250514",
       "oldCount": 373,
-      "newCount": 303
+      "newCount": 303,
+      "isNew": false
+    },
+    {
+      "date": "20250915",
+      "model": "JoyCode + Claude 4 Sonnet + GPT-4.1",
+      "orig": 74.6,
+      "sweAbs": 61.2,
+      "drop": 13.4,
+      "oldRank": 17,
+      "newRank": 17,
+      "modelKey": "20250915_JoyCode",
+      "oldCount": 373,
+      "newCount": 306,
+      "isNew": false
     },
     {
       "date": "20250603",
-      "model": "Refact.ai Agent",
+      "model": "Refact.ai Agent + Claude 4 Sonnet + o4-mini",
       "orig": 74.4,
       "sweAbs": 58.4,
       "drop": 16.0,
-      "oldRank": 12,
-      "newRank": 16,
+      "oldRank": 18,
+      "newRank": 24,
       "modelKey": "20250603_Refact_Agent_claude-4-sonnet",
       "oldCount": 372,
-      "newCount": 292
+      "newCount": 292,
+      "isNew": false
     },
     {
       "date": "20251015",
@@ -155,11 +245,12 @@
       "orig": 74.4,
       "sweAbs": 58.4,
       "drop": 16.0,
-      "oldRank": 13,
-      "newRank": 17,
+      "oldRank": 19,
+      "newRank": 25,
       "modelKey": "20251015_Prometheus_v1.2.1_gpt5",
       "oldCount": 372,
-      "newCount": 292
+      "newCount": 292,
+      "isNew": false
     },
     {
       "date": "20251124",
@@ -167,23 +258,12 @@
       "orig": 74.2,
       "sweAbs": 58.0,
       "drop": 16.2,
-      "oldRank": 14,
-      "newRank": 19,
+      "oldRank": 20,
+      "newRank": 27,
       "modelKey": "20251124_mini-v1.16.0_claude-opus-4-5-20251101",
       "oldCount": 371,
-      "newCount": 290
-    },
-    {
-      "date": "20251103",
-      "model": "Salesforce AI Research SAGE (OpenHands)",
-      "orig": 74.0,
-      "sweAbs": 61.6,
-      "drop": 12.4,
-      "oldRank": 15,
-      "newRank": 7,
-      "modelKey": "20251103_SalesforceAIResearch_SAGE_OpenHands",
-      "oldCount": 370,
-      "newCount": 308
+      "newCount": 290,
+      "isNew": false
     },
     {
       "date": "20251118",
@@ -191,11 +271,25 @@
       "orig": 74.0,
       "sweAbs": 56.8,
       "drop": 17.2,
-      "oldRank": 16,
-      "newRank": 22,
+      "oldRank": 21,
+      "newRank": 31,
       "modelKey": "20251118_mini-v1.15.0_gemini-3-pro-preview-20251118",
       "oldCount": 370,
-      "newCount": 284
+      "newCount": 284,
+      "isNew": false
+    },
+    {
+      "date": "20251103",
+      "model": "Salesforce AI Research SAGE (OpenHands)",
+      "orig": 74.0,
+      "sweAbs": 61.6,
+      "drop": 12.4,
+      "oldRank": 22,
+      "newRank": 14,
+      "modelKey": "20251103_SalesforceAIResearch_SAGE_OpenHands",
+      "oldCount": 370,
+      "newCount": 308,
+      "isNew": false
     },
     {
       "date": "20250522",
@@ -203,11 +297,12 @@
       "orig": 73.2,
       "sweAbs": 58.4,
       "drop": 14.8,
-      "oldRank": 17,
-      "newRank": 15,
+      "oldRank": 23,
+      "newRank": 26,
       "modelKey": "20250522_tools_claude-4-opus",
       "oldCount": 366,
-      "newCount": 292
+      "newCount": 292,
+      "isNew": false
     },
     {
       "date": "20251021",
@@ -215,11 +310,51 @@
       "orig": 73.2,
       "sweAbs": 61.2,
       "drop": 12.0,
-      "oldRank": 18,
-      "newRank": 10,
+      "oldRank": 24,
+      "newRank": 18,
       "modelKey": "20251021_SalesforceAIResearch_SAGE_bash_only",
       "oldCount": 366,
-      "newCount": 306
+      "newCount": 306,
+      "isNew": false
+    },
+    {
+      "date": "20260217",
+      "model": "mini-SWE-agent + GPT-5-2 (high reasoning)",
+      "orig": 72.8,
+      "sweAbs": 58.8,
+      "drop": 14.0,
+      "oldRank": 25,
+      "newRank": 23,
+      "modelKey": "20260217_mini-v2.0.0_gpt-5-2-high",
+      "oldCount": 364,
+      "newCount": 294,
+      "isNew": true
+    },
+    {
+      "date": "20260219",
+      "model": "mini-SWE-agent + GPT-5-2 Codex",
+      "orig": 72.8,
+      "sweAbs": 61.6,
+      "drop": 11.2,
+      "oldRank": 26,
+      "newRank": 13,
+      "modelKey": "20260219_mini-v2.0.0_gpt-5-2-codex",
+      "oldCount": 364,
+      "newCount": 308,
+      "isNew": true
+    },
+    {
+      "date": "20260217",
+      "model": "mini-SWE-agent + GLM-5 (high reasoning)",
+      "orig": 72.8,
+      "sweAbs": 61.4,
+      "drop": 11.4,
+      "oldRank": 27,
+      "newRank": 15,
+      "modelKey": "20260217_mini-v2.0.0_glm-5-high",
+      "oldCount": 364,
+      "newCount": 307,
+      "isNew": true
     },
     {
       "date": "20250522",
@@ -227,11 +362,12 @@
       "orig": 72.2,
       "sweAbs": 56.4,
       "drop": 15.8,
-      "oldRank": 19,
-      "newRank": 24,
+      "oldRank": 28,
+      "newRank": 33,
       "modelKey": "20250522_tools_claude-4-sonnet",
       "oldCount": 361,
-      "newCount": 282
+      "newCount": 282,
+      "isNew": false
     },
     {
       "date": "20250807",
@@ -239,11 +375,12 @@
       "orig": 71.8,
       "sweAbs": 61.2,
       "drop": 10.6,
-      "oldRank": 20,
-      "newRank": 11,
+      "oldRank": 29,
+      "newRank": 19,
       "modelKey": "20250807_openhands_gpt5",
       "oldCount": 359,
-      "newCount": 306
+      "newCount": 306,
+      "isNew": false
     },
     {
       "date": "20251211",
@@ -251,119 +388,12 @@
       "orig": 71.6,
       "sweAbs": 56.8,
       "drop": 14.8,
-      "oldRank": 21,
-      "newRank": 23,
+      "oldRank": 30,
+      "newRank": 32,
       "modelKey": "20251211_mini-v1.17.2_gpt-5.2-2025-12-11-high",
       "oldCount": 358,
-      "newCount": 284
-    },
-    {
-      "date": "20250715",
-      "model": "Qodo Command",
-      "orig": 71.2,
-      "sweAbs": 57.6,
-      "drop": 13.6,
-      "oldRank": 22,
-      "newRank": 20,
-      "modelKey": "20250715_qodo_command",
-      "oldCount": 356,
-      "newCount": 288
-    },
-    {
-      "date": "20251014",
-      "model": "Lingxi v1.5 x Kimi K2",
-      "orig": 71.2,
-      "sweAbs": 57.6,
-      "drop": 13.6,
-      "oldRank": 23,
-      "newRank": 21,
-      "modelKey": "20251014_Lingxi_kimi_k2",
-      "oldCount": 356,
-      "newCount": 288
-    },
-    {
-      "date": "20250929",
-      "model": "Prometheus-v1.2 + GPT-5",
-      "orig": 71.2,
-      "sweAbs": 56.0,
-      "drop": 15.2,
-      "oldRank": 24,
-      "newRank": 26,
-      "modelKey": "20250929_Prometheus_v1.2_gpt5",
-      "oldCount": 356,
-      "newCount": 280
-    },
-    {
-      "date": "20250710",
-      "model": "Bloop",
-      "orig": 71.0,
-      "sweAbs": 59.6,
-      "drop": 11.4,
-      "oldRank": 25,
-      "newRank": 14,
-      "modelKey": "20250710_bloop",
-      "oldCount": 355,
-      "newCount": 298
-    },
-    {
-      "date": "20250623",
-      "model": "Warp",
-      "orig": 71.0,
-      "sweAbs": 52.6,
-      "drop": 18.4,
-      "oldRank": 26,
-      "newRank": 30,
-      "modelKey": "20250623_warp",
-      "oldCount": 355,
-      "newCount": 263
-    },
-    {
-      "date": "20250611",
-      "model": "Moatless Tools + Claude 4 Sonnet",
-      "orig": 70.8,
-      "sweAbs": 56.2,
-      "drop": 14.6,
-      "oldRank": 27,
-      "newRank": 25,
-      "modelKey": "20250611_moatless_claude-4-sonnet-20250514",
-      "oldCount": 354,
-      "newCount": 281
-    },
-    {
-      "date": "20250519",
-      "model": "TRAE",
-      "orig": 70.6,
-      "sweAbs": 54.2,
-      "drop": 16.4,
-      "oldRank": 28,
-      "newRank": 29,
-      "modelKey": "20250519_trae",
-      "oldCount": 353,
-      "newCount": 271
-    },
-    {
-      "date": "20250515",
-      "model": "Refact.ai Agent",
-      "orig": 70.4,
-      "sweAbs": 54.8,
-      "drop": 15.6,
-      "oldRank": 29,
-      "newRank": 27,
-      "modelKey": "20250515_Refact_Agent",
-      "oldCount": 352,
-      "newCount": 274
-    },
-    {
-      "date": "20250929",
-      "model": "mini-SWE-agent + Claude 4.5 Sonnet (20250929)",
-      "orig": 70.4,
-      "sweAbs": 54.4,
-      "drop": 16.0,
-      "oldRank": 30,
-      "newRank": 28,
-      "modelKey": "20250929_mini-v1.13.3_sonnet-4-5-20250929",
-      "oldCount": 352,
-      "newCount": 272
+      "newCount": 284,
+      "isNew": false
     }
   ]
 }
