@@ -1,7 +1,7 @@
 predictions_test_path=/path/to/preds.json
 instance_ids=django__django-11141,psf__requests-1724
 
-must_cover_line_file=swe_plus_res/modified_raleted_lines/final_results.json
+must_cover_line_file=swe_abs_res/modified_raleted_lines/final_results.json
 rewrite_preds=False
 use_coverage=False
 coverage_eval=False

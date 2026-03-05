@@ -154,7 +154,7 @@ python -m swebench.runtest.get_line_number \
     # --instance_ids pylint-dev__pylint-6386
 ```
 
-**Output**: `swe_plus_res/modified_raleted_lines/final_results.json`
+**Output**: `swe_abs_res/modified_raleted_lines/final_results.json`
 
 
 ---
@@ -276,7 +276,7 @@ python -m swebench.runtest.run_evaluation_test \
     --timeout 120
 ```
 
-**Output**: `swe_plus_res/eval_agent/{run_id}/final_results.json`
+**Output**: `swe_abs_res/eval_agent/{run_id}/final_results.json`
 
 Each instance in the output records which agent patches passed or failed the augmented tests:
 
@@ -297,7 +297,7 @@ After evaluation, analyze how each model's score and rank changed under SWE-ABS:
 
 ```bash
 python tool_script/analyze_leaderboard.py \
-    --results swe-bench/swe_plus_res/eval_agent/<run_id>/final_results.json \
+    --results swe-bench/swe_abs_res/eval_agent/<run_id>/final_results.json \
     --key-map data/key_map_top30.json
 ```
 

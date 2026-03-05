@@ -12,7 +12,7 @@ redo=True
 use_coverage=False
 rewrite_preds=False
 coverage_eval=False
-must_cover_line=swe_plus_res/extract_line_numbers/exe_line_all/final_results.json
+must_cover_line=swe_abs_res/extract_line_numbers/exe_line_all/final_results.json
 
 
 python -m run_test.eval_model_test_patch \

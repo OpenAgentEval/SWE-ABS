@@ -57,7 +57,7 @@ from utils.logging_utils import setup_global_logger
 from utils.parser_util import str2bool
 from utils.must_coverage_utils import compute_must_coverage
 
-RUN_SWE_ABS_DIR=Path("swe_plus_res/")
+RUN_SWE_ABS_DIR=Path("swe_abs_res/")
 RUN_EVALUATION_LOG_DIR=Path("logs/")
 
 global_logger = None

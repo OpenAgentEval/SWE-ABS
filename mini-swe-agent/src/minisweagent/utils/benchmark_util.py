@@ -18,7 +18,7 @@ from minisweagent.utils.parser_utils import get_test_directives
 
 # SWE-bench Pro test command mapping cache
 _SWEBENCHPRO_TEST_CMD_CACHE: dict[str, str] | None = None
-_SWEBENCHPRO_TEST_CMD_PATH = Path("SWE-ABS/SWE-bench_Pro-os/test_commands_clean.json")
+_SWEBENCHPRO_TEST_CMD_PATH = Path(__file__).parents[4] / "SWE-bench_Pro-os/test_commands_clean.json"
 
 
 class BenchmarkConfig(ABC):

@@ -473,7 +473,7 @@ def compute_coverage(output_path, modified_related_lines, use_key = "exe_slice_l
 if __name__ == "__main__":
     from swebench.harness.code_analysis import get_analyzer
 
-    old_file = 'SWE-ABS/swe-bench/swe_plus_res/modified_raleted_lines/final_results.json'
+    old_file = 'SWE-ABS/swe-bench/swe_abs_res/modified_raleted_lines/final_results.json'
     with open(old_file, 'r') as f:
         old_lines = json.load(f)
 

@@ -634,7 +634,7 @@ def compute_coverage(
     Compute coverage score for an instance against required lines.
 
     This function is compatible with the existing workflow that uses
-    modified_related_lines from swe_plus_res/extract_line_numbers/exe_line_all/final_results.json
+    modified_related_lines from swe_abs_res/extract_line_numbers/exe_line_all/final_results.json
 
     Args:
         instance_dir: Path to instance directory (containing workspace/coverage)
@@ -713,7 +713,7 @@ def compute_coverage_batch(
     Args:
         instances_dir: Directory containing instance_* subdirectories
         all_modified_related_lines: Dict mapping instance_id to modified_related_lines
-            Format from swe_plus_res/extract_line_numbers/exe_line_all/final_results.json
+            Format from swe_abs_res/extract_line_numbers/exe_line_all/final_results.json
         use_key: Which key to use for required lines
 
     Returns:

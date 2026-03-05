@@ -1,6 +1,7 @@
 
 import os
 import json
+import re
 import docker
 from helper_code.image_uri import get_dockerhub_image_uri
 
@@ -228,8 +229,10 @@ def collect_outputs_local(workspace_dir, log_dir, repo_name, uid, prefix):
 
 
 
-def run_docker(args, uid, workspace_dir, log_dir, scripts_dir, patch, model_test_patch, sample, prefix, result, repo_name,global_logger,
-               dockerhub_username='jefzda', docker_platform=None, mem_limit=None, timeout=None, block_network=False,use_coverage=False):
+def run_docker(args, uid, workspace_dir, log_dir, scripts_dir, patch, 
+               model_test_patch, sample, prefix, result, repo_name, global_logger,
+               dockerhub_username='jefzda', docker_platform=None, mem_limit=None, 
+               timeout=None, block_network=False,use_coverage=False):
     """
         Run a Docker container to execute tests.
 
@@ -346,4 +349,5 @@ def run_docker(args, uid, workspace_dir, log_dir, scripts_dir, patch, model_test
         pass
 
     return output, timed_out
+
 

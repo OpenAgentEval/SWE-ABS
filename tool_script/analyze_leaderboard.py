@@ -7,7 +7,7 @@ the score drop and rank change for each model.
 
 Usage:
     python tool_script/analyze_leaderboard.py \
-        --results swe-bench/swe_plus_res/eval_agent/<run_id>/final_results.json \
+        --results swe-bench/swe_abs_res/eval_agent/<run_id>/final_results.json \
         --key-map data/key_map_top30.json
 
 The results JSON has this structure:

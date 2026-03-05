@@ -15,8 +15,8 @@ except Exception:
 from tqdm import tqdm
 
 # Add util path for ResultManager
-UTIL_PATH = Path(__file__).resolve().parent.parent.parent / "util"
-sys.path.insert(0, str(UTIL_PATH))
+# UTIL_PATH = Path(__file__).resolve().parent.parent.parent / "util"
+# sys.path.insert(0, str(UTIL_PATH))
 from sweabs_utils.preds_manager import ResultManager
 
 from utils.constants import (

@@ -1088,9 +1088,9 @@ def main():
     # Auto-detect must_cover_line_file based on benchmark if not specified
     if args.must_cover_line_file is None:
         if args.benchmark == "swebenchpro":
-            must_cover_line_file = swe_bench_pro_dir / "swe_plus_res" / "extract_line_numbers" / "exe_line_all" / "final_results.json"
+            must_cover_line_file = swe_bench_pro_dir / "swe_abs_res" / "extract_line_numbers" / "exe_line_all" / "final_results.json"
         else:
-            must_cover_line_file = swe_bench_dir / "swe_plus_res" / "modified_raleted_lines" / "final_results.json"
+            must_cover_line_file = swe_bench_dir / "swe_abs_res" / "modified_raleted_lines" / "final_results.json"
     else:
         must_cover_line_file = Path(args.must_cover_line_file)
 

@@ -24,8 +24,7 @@ import pandas as pd
 from tqdm import tqdm
 
 # Add util path for ResultManager
-UTIL_PATH = Path(__file__).resolve().parent.parent.parent / "util"
-sys.path.insert(0, str(UTIL_PATH))
+
 from sweabs_utils.preds_manager import ResultManager
 
 from helper_code.image_uri import get_dockerhub_image_uri
