@@ -63,10 +63,10 @@ from swebench.harness.utils import (
     optional_str,
 )
 
+# Keep git apply atomic so the fallback sees the prepared tree, including setup edits.
 GIT_APPLY_CMDS = [
     "git apply --verbose",
-    "git apply --verbose --reject",
-    "patch --batch --fuzz=5 -p1 -i",
+    "patch --batch --forward --fuzz=5 -p1 -i",
 ]
 
 def run_instance(
